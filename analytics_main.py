@@ -29,10 +29,10 @@ def main():
     print("Is association file valid: ", data_processor.validate_association())
     tokenizer = Tokenizer(args, data_processor)
     # test negation detection
-    negation_detection = NegationDetection(args)
-    for split, split_sample in data_processor.iu_mesh_impression_split.items():
-        for kid, sample in split_sample.items():
-            negation_detection.get_lemmatize_doc_object(sample)
+    # negation_detection = NegationDetection(args)
+    # for split, split_sample in data_processor.iu_mesh_impression_split.items():
+    #     for kid, sample in split_sample.items():
+    #         negation_detection.get_lemmatize_doc_object(sample)
     #################################################################################
     exp_stats = ExperimentsStatistics(tokenizer, args.exp)
     print("exp: ", args.exp, " ", exp_stats.stats)
@@ -95,19 +95,25 @@ def main():
     plot.plot_stacked_bar(dataset=plot.dataset, num=fig_num, xs=["t_ratio", "normal_ratio"], ys=["split"],
                           colors=[plot.abnormal_color, plot.normal_color], labels=['Abnormal', 'Normal'],
                           number_of_col_in_legend=number_of_col_in_legend, plot_name="Normal to Abnormal ratio",
-                          save_name="[Ratio]Normal to Abnormal", is_bar_value=False)
+                          save_name="[Ratio]Normal to Abnormal",
+                          custom_bar_value={"ys": plot.dataset.head().index,
+                                            "value_key": ["abnormal_ratio", "normal_ratio"]})
     # indexed ratio
     fig_num += 1
     plot.plot_stacked_bar(dataset=plot.dataset, num=fig_num, xs=["t_ratio", "no_index_ratio"], ys=["split"],
                           colors=[plot.indexed_color, plot.no_index_color], labels=['Indexed', 'No Indexing'],
                           number_of_col_in_legend=number_of_col_in_legend, plot_name="Indexed to No Indexing ratio",
-                          save_name="[Ratio]Indexed to No Indexing", is_bar_value=False)
+                          save_name="[Ratio]Indexed to No Indexing",
+                          custom_bar_value={"ys": plot.dataset.head().index,
+                                            "value_key": ["indexed_ratio", "no_index_ratio"]})
     # empty mesh ratio
     fig_num += 1
     plot.plot_stacked_bar(dataset=plot.dataset, num=fig_num, xs=["t_ratio", "no_mesh_ratio"], ys=["split"],
                           colors=[plot.mesh_color, plot.no_mesh_color], labels=['MeSH', 'No MeSH'],
                           number_of_col_in_legend=number_of_col_in_legend, plot_name="Mesh to No MeSH ratio",
-                          save_name="[Ratio]Mesh to No MeSH", is_bar_value=False)
+                          save_name="[Ratio]Mesh to No MeSH",
+                          custom_bar_value={"ys": plot.dataset.head().index,
+                                            "value_key": ["meshed_ratio", "no_mesh_ratio"]})
     #
     # # new split
     # args.is_new_random_split = 1
