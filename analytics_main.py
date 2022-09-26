@@ -14,42 +14,45 @@ def main():
     args = ArgumentParser().args
 
     # r2gen split
-    args.is_new_random_split = 0
-
+    # args.is_new_random_split = 0
+    # to check the old code
     # associate_iu_r2gen_kaggle_by_id(args)
     # mip_j_split = json.loads(open(args.iu_mesh_impression_path, 'r').read())
     # mip_j = {sid: sample for split, split_sample in mip_j_split.items() for sid, sample in split_sample.items()}
     # json.dump(mip_j, open(args.iu_mesh_impression_path.replace("_split", ""), 'w'))
+    ######################################
 
     data_processor = DataProcessor(args)
-    # print("Is association file valid: ", data_processor.validate_association())
+    print("Is association file valid: ", data_processor.validate_association())
     tokenizer = Tokenizer(args, data_processor)
-    negation_detection = NegationDetection(args)
-    for split, split_sample in data_processor.iu_mesh_impression_split.items():
-        for kid, sample in split_sample.items():
-            negation_detection.get_lemmatize_doc_object(sample)
-    # exp_stats = ExperimentsStatistics(tokenizer, args.exp)
-    # print("exp: ", args.exp, " ", exp_stats.stats)
-    #
-    # print("######### before split#########")
-    # data_processor.analyze.print_normal_percentage()
-    # data_processor.analyze.print_no_index_percentage()
-    # data_processor.analyze.print_empty_mesh_asc_percentage()
-    # print("Is association file valid: ", data_processor.validate_association())
-    #
-    # plot = Plot(args, data_processor.analyze)
-    # # normal ratio
-    # plot.plot_stacked_bar(num=1, xs=["t_ratio", "normal_ratio"], ys=["split"],
-    #                       colors=[plot.abnormal_color, plot.normal_color], labels=['Abnormal', 'Normal'],
-    #                       number_of_col_in_legend=2, plot_name="[R2gen Split]Normal to Abnormal ratio")
-    # # indexed ratio
-    # plot.plot_stacked_bar(num=2, xs=["t_ratio", "no_index_ratio"], ys=["split"],
-    #                       colors=[plot.indexed_color, plot.no_index_color], labels=['Indexed', 'No Indexing'],
-    #                       number_of_col_in_legend=2, plot_name="[R2gen Split]Indexed to No Indexing ratio")
-    # # empty mesh ratio
-    # plot.plot_stacked_bar(num=3, xs=["t_ratio", "no_mesh_ratio"], ys=["split"],
-    #                       colors=[plot.mesh_color, plot.no_mesh_color], labels=['MeSH', 'No MeSH'],
-    #                       number_of_col_in_legend=2, plot_name="[R2gen Split]Mesh to No MeSH ratio")
+    # test negation detection
+    # negation_detection = NegationDetection(args)
+    # for split, split_sample in data_processor.iu_mesh_impression_split.items():
+    #     for kid, sample in split_sample.items():
+    #         negation_detection.get_lemmatize_doc_object(sample)
+    #################################################################################
+    exp_stats = ExperimentsStatistics(tokenizer, args.exp)
+    print("exp: ", args.exp, " ", exp_stats.stats)
+
+    print("######### before split#########")
+    data_processor.analyze.print_normal_percentage()
+    data_processor.analyze.print_no_index_percentage()
+    data_processor.analyze.print_empty_mesh_asc_percentage()
+    print("Is association file valid: ", data_processor.validate_association())
+
+    plot = Plot(args, data_processor.analyze)
+    # normal ratio
+    plot.plot_stacked_bar(num=1, xs=["t_ratio", "normal_ratio"], ys=["split"],
+                          colors=[plot.abnormal_color, plot.normal_color], labels=['Abnormal', 'Normal'],
+                          number_of_col_in_legend=2, plot_name="[R2gen Split]Normal to Abnormal ratio")
+    # indexed ratio
+    plot.plot_stacked_bar(num=2, xs=["t_ratio", "no_index_ratio"], ys=["split"],
+                          colors=[plot.indexed_color, plot.no_index_color], labels=['Indexed', 'No Indexing'],
+                          number_of_col_in_legend=2, plot_name="[R2gen Split]Indexed to No Indexing ratio")
+    # empty mesh ratio
+    plot.plot_stacked_bar(num=3, xs=["t_ratio", "no_mesh_ratio"], ys=["split"],
+                          colors=[plot.mesh_color, plot.no_mesh_color], labels=['MeSH', 'No MeSH'],
+                          number_of_col_in_legend=2, plot_name="[R2gen Split]Mesh to No MeSH ratio")
     #
     # # new split
     # args.is_new_random_split = 1
