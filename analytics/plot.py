@@ -16,7 +16,10 @@ class Plot(object):
         self.no_index_color = "#DD8452"
         self.mesh_color = "#8172B3"
         self.no_mesh_color = "#DA8BC3"
-        self.dataset = self.get_info_dict()
+        self.train_color = "#64B5CD"
+        self.val_color = "#CCB974"
+        self.test_color = "#DA8BC3"
+        self.dataset, self.dataset_t = self.get_info_dict()
 
     def populate_analyze(self):
         self.analyze.get_number_of_normal()
@@ -54,47 +57,66 @@ class Plot(object):
         dataset["indexed_ratio"] = dataset["indexed"] / dataset["sample_size"]
         dataset["meshed_ratio"] = dataset["meshed"] / dataset["sample_size"]
 
-        return dataset
+        dataset_t = dataset.transpose()
+        dataset_t.columns = dataset["split"]
+        dataset_t = dataset_t.drop(
+            index=["split", "t_ratio", "normal_ratio", "no_index_ratio", "no_mesh_ratio", "abnormal_ratio",
+                   "indexed_ratio", "meshed_ratio"])
+        dataset_t = dataset_t.reindex(['normal', 'abnormal', 'no_index', 'indexed', 'no_mesh', 'meshed', 'sample_size'])
+        dataset_t["-test"] = dataset_t["total"] - dataset_t["test"]
+        dataset_t["ys"] = dataset_t.index
 
-    def plot_stacked_bar(self, dataset, num, xs, ys, colors, labels, number_of_col_in_legend, plot_name, save_name,
-                         custom_bar_value=None, round_to=4):
+        return dataset, dataset_t
+
+    def plot_stacked_bar(self, dataset, num, xs, ys, colors, legend_labels, number_of_col_in_legend, plot_name,
+                         save_name,
+                         custom_bar_value=None, round_to=4, div_factor=1.5, xylabels=["", ""], ha='center'):
         plt.figure(num=num)
         bar_legends = []
         ax = None
-        if len(xs) == len(ys) == len(colors) == len(labels):
+        if len(xs) == len(ys) == len(colors) == len(legend_labels):
             for i in range(len(xs)):
                 ax = sns.barplot(x=xs[i], y=ys[i], data=dataset, color=colors[i])
                 if custom_bar_value is None:
                     ax.bar_label(container=ax.containers[0])
                 else:
                     for index, row in enumerate(custom_bar_value["ys"]):
-                        ax.text(dataset[xs[i]][index] / 1.5, row,
+                        ax.text(dataset[xs[i]][index] / div_factor, row,
                                 round(dataset[custom_bar_value["value_key"][i]][index], round_to), color='black',
-                                ha='center')
-                bar_legends.append(mpatches.Patch(color=colors[i], label=labels[i]))
+                                ha=ha)
+                bar_legends.append(mpatches.Patch(color=colors[i], label=legend_labels[i]))
+                ax.set(xlabel=xylabels[0], ylabel=xylabels[1])
+                # ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
+                # ax.set_yticklabels(ax.get_yticklabels(), rotation=45)
         else:
-            if len(xs) == 1 and len(ys) == len(colors) == len(labels):
+            if len(xs) == 1 and len(ys) == len(colors) == len(legend_labels):
                 for i in range(len(ys)):
                     ax = sns.barplot(x=xs[0], y=ys[i], data=dataset, color=colors[i])
                     if custom_bar_value is None:
                         ax.bar_label(container=ax.containers[0])
                     else:
                         for index, row in enumerate(custom_bar_value["ys"]):
-                            ax.text(dataset[xs[i]][index] / 1.5, row,
+                            ax.text(dataset[xs[i]][index] / div_factor, row,
                                     round(dataset[custom_bar_value["value_key"][i]][index], round_to), color='black',
-                                    ha='center')
-                    bar_legends.append(mpatches.Patch(color=colors[i], label=labels[i]))
-            if len(ys) == 1 and len(xs) == len(colors) == len(labels):
+                                    ha=ha)
+                    bar_legends.append(mpatches.Patch(color=colors[i], label=legend_labels[i]))
+                    ax.set(xlabel=xylabels[0], ylabel=xylabels[1])
+                    # ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
+                    # ax.set_yticklabels(ax.get_yticklabels(), rotation=45)
+            if len(ys) == 1 and len(xs) == len(colors) == len(legend_labels):
                 for i in range(len(xs)):
                     ax = sns.barplot(x=xs[i], y=ys[0], data=dataset, color=colors[i])
                     if custom_bar_value is None:
                         ax.bar_label(container=ax.containers[0])
                     else:
                         for index, row in enumerate(custom_bar_value["ys"]):
-                            ax.text(dataset[xs[i]][index] / 1.5, row,
+                            ax.text(dataset[xs[i]][index] / div_factor, row,
                                     round(dataset[custom_bar_value["value_key"][i]][index], round_to), color='black',
-                                    ha='center')
-                    bar_legends.append(mpatches.Patch(color=colors[i], label=labels[i]))
+                                    ha=ha)
+                    bar_legends.append(mpatches.Patch(color=colors[i], label=legend_labels[i]))
+                    ax.set(xlabel=xylabels[0], ylabel=xylabels[1])
+                    # ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
+                    # ax.set_yticklabels(ax.get_yticklabels(), rotation=45)
         plt.legend(loc='upper right', bbox_to_anchor=(1.01, 1.11),
                    ncol=number_of_col_in_legend, fancybox=True, shadow=True, handles=bar_legends)
         plt.title(plot_name, pad=28)
