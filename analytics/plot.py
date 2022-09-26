@@ -47,27 +47,35 @@ class Plot(object):
         dataset["normal_ratio"] = dataset["normal"] / dataset["sample_size"]
         dataset["no_index_ratio"] = dataset["no_index"] / dataset["sample_size"]
         dataset["no_mesh_ratio"] = dataset["no_mesh"] / dataset["sample_size"]
+        dataset["abnormal"] = dataset["sample_size"] - dataset["normal"]
+        dataset["indexed"] = dataset["sample_size"] - dataset["no_index"]
+        dataset["meshed"] = dataset["sample_size"] - dataset["no_mesh"]
 
         return dataset
 
-    def plot_stacked_bar(self, num, xs, ys, colors, labels, number_of_col_in_legend, plot_name):
+    def plot_stacked_bar(self, dataset, num, xs, ys, colors, labels, number_of_col_in_legend, plot_name, save_name,
+                         is_bar_value=True):
         plt.figure(num=num)
         bar_legends = []
+        ax = None
         if len(xs) == len(ys) == len(colors) == len(labels):
             for i in range(len(xs)):
-                sns.barplot(x=xs[i], y=ys[i], data=self.dataset, color=colors[i])
+                ax = sns.barplot(x=xs[i], y=ys[i], data=dataset, color=colors[i])
                 bar_legends.append(mpatches.Patch(color=colors[i], label=labels[i]))
         else:
             if len(xs) == 1 and len(ys) == len(colors) == len(labels):
                 for i in range(len(ys)):
-                    sns.barplot(x=xs[0], y=ys[i], data=self.dataset, color=colors[i])
+                    ax = sns.barplot(x=xs[0], y=ys[i], data=dataset, color=colors[i])
                     bar_legends.append(mpatches.Patch(color=colors[i], label=labels[i]))
             if len(ys) == 1 and len(xs) == len(colors) == len(labels):
                 for i in range(len(xs)):
-                    sns.barplot(x=xs[i], y=ys[0], data=self.dataset, color=colors[i])
+                    ax = sns.barplot(x=xs[i], y=ys[0], data=dataset, color=colors[i])
                     bar_legends.append(mpatches.Patch(color=colors[i], label=labels[i]))
+        if is_bar_value and ax is not None:
+            for i in ax.containers:
+                ax.bar_label(i, )
         plt.legend(loc='upper right', bbox_to_anchor=(1.01, 1.11),
                    ncol=number_of_col_in_legend, fancybox=True, shadow=True, handles=bar_legends)
         plt.title(plot_name, pad=28)
         if self.is_save_plot:
-            plt.savefig("plot_assets/" + plot_name.lower().replace(" ", "_") + ".png")
+            plt.savefig("plot_assets/" + save_name.lower().replace(" ", "_") + ".png")

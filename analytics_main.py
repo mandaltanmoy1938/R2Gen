@@ -3,6 +3,9 @@ import time
 
 from _global import timer
 from _global.argument_parser import ArgumentParser
+from analytics.experiments_statistics import ExperimentsStatistics
+from analytics.analyze import Analyze
+from analytics.plot import Plot
 from data_processors.data_processor import DataProcessor
 from data_processors.negation_detection import NegationDetection
 from modules.tokenizers import Tokenizer
@@ -26,10 +29,10 @@ def main():
     print("Is association file valid: ", data_processor.validate_association())
     tokenizer = Tokenizer(args, data_processor)
     # test negation detection
-    # negation_detection = NegationDetection(args)
-    # for split, split_sample in data_processor.iu_mesh_impression_split.items():
-    #     for kid, sample in split_sample.items():
-    #         negation_detection.get_lemmatize_doc_object(sample)
+    negation_detection = NegationDetection(args)
+    for split, split_sample in data_processor.iu_mesh_impression_split.items():
+        for kid, sample in split_sample.items():
+            negation_detection.get_lemmatize_doc_object(sample)
     #################################################################################
     exp_stats = ExperimentsStatistics(tokenizer, args.exp)
     print("exp: ", args.exp, " ", exp_stats.stats)
@@ -41,18 +44,70 @@ def main():
     print("Is association file valid: ", data_processor.validate_association())
 
     plot = Plot(args, data_processor.analyze)
+
+    number_of_col_in_legend = 2
+    fig_num = 1
+    # Vertical plot
+    # split wise normal
+    plot.plot_stacked_bar(dataset=plot.dataset, num=fig_num, xs=["split"], ys=["normal"],
+                          colors=[plot.normal_color], labels=['Normal'],
+                          number_of_col_in_legend=number_of_col_in_legend, plot_name="Normal by Split",
+                          save_name="[Split Vertical]Normal")
+
+    # split wise no index
+    fig_num += 1
+    plot.plot_stacked_bar(dataset=plot.dataset, num=fig_num, xs=["split"], ys=["no_index"],
+                          colors=[plot.no_index_color], labels=['No Indexing'],
+                          number_of_col_in_legend=number_of_col_in_legend, plot_name="No Indexing by Split",
+                          save_name="[Split Vertical]No Indexing")
+
+    # split wise no mesh
+    fig_num += 1
+    plot.plot_stacked_bar(dataset=plot.dataset, num=fig_num, xs=["split"], ys=["no_mesh"],
+                          colors=[plot.no_mesh_color], labels=['No MeSH'],
+                          number_of_col_in_legend=number_of_col_in_legend, plot_name="No MeSH by Split",
+                          save_name="[Split Vertical]No MeSH")
+
+    # split wise abnormal
+    fig_num += 1
+    plot.plot_stacked_bar(dataset=plot.dataset, num=fig_num, xs=["split"], ys=["abnormal"],
+                          colors=[plot.abnormal_color], labels=['Abnormal'],
+                          number_of_col_in_legend=number_of_col_in_legend, plot_name="Abnormal by Split",
+                          save_name="[Split Vertical]Abnormal")
+
+    # split wise indexed
+    fig_num += 1
+    plot.plot_stacked_bar(dataset=plot.dataset, num=fig_num, xs=["split"], ys=["indexed"],
+                          colors=[plot.indexed_color], labels=['Indexed'],
+                          number_of_col_in_legend=number_of_col_in_legend, plot_name="Indexed by Split",
+                          save_name="[Split Vertical]Indexed")
+
+    # split wise meshed
+    fig_num += 1
+    plot.plot_stacked_bar(dataset=plot.dataset, num=fig_num, xs=["split"], ys=["meshed"],
+                          colors=[plot.mesh_color], labels=['Meshed'],
+                          number_of_col_in_legend=number_of_col_in_legend, plot_name="MeSHed by Split",
+                          save_name="[Split Vertical]MeSHed")
+
+    # Horizontal Stacked plot
     # normal ratio
-    plot.plot_stacked_bar(num=1, xs=["t_ratio", "normal_ratio"], ys=["split"],
+    fig_num += 1
+    plot.plot_stacked_bar(dataset=plot.dataset, num=fig_num, xs=["t_ratio", "normal_ratio"], ys=["split"],
                           colors=[plot.abnormal_color, plot.normal_color], labels=['Abnormal', 'Normal'],
-                          number_of_col_in_legend=2, plot_name="[R2gen Split]Normal to Abnormal ratio")
+                          number_of_col_in_legend=number_of_col_in_legend, plot_name="Normal to Abnormal ratio",
+                          save_name="[Ratio]Normal to Abnormal", is_bar_value=False)
     # indexed ratio
-    plot.plot_stacked_bar(num=2, xs=["t_ratio", "no_index_ratio"], ys=["split"],
+    fig_num += 1
+    plot.plot_stacked_bar(dataset=plot.dataset, num=fig_num, xs=["t_ratio", "no_index_ratio"], ys=["split"],
                           colors=[plot.indexed_color, plot.no_index_color], labels=['Indexed', 'No Indexing'],
-                          number_of_col_in_legend=2, plot_name="[R2gen Split]Indexed to No Indexing ratio")
+                          number_of_col_in_legend=number_of_col_in_legend, plot_name="Indexed to No Indexing ratio",
+                          save_name="[Ratio]Indexed to No Indexing", is_bar_value=False)
     # empty mesh ratio
-    plot.plot_stacked_bar(num=3, xs=["t_ratio", "no_mesh_ratio"], ys=["split"],
+    fig_num += 1
+    plot.plot_stacked_bar(dataset=plot.dataset, num=fig_num, xs=["t_ratio", "no_mesh_ratio"], ys=["split"],
                           colors=[plot.mesh_color, plot.no_mesh_color], labels=['MeSH', 'No MeSH'],
-                          number_of_col_in_legend=2, plot_name="[R2gen Split]Mesh to No MeSH ratio")
+                          number_of_col_in_legend=number_of_col_in_legend, plot_name="Mesh to No MeSH ratio",
+                          save_name="[Ratio]Mesh to No MeSH", is_bar_value=False)
     #
     # # new split
     # args.is_new_random_split = 1
@@ -67,15 +122,15 @@ def main():
     # # normal ratio
     # plot.plot_stacked_bar(num=4, xs=["t_ratio", "normal_ratio"], ys=["split"],
     #                       colors=[plot.abnormal_color, plot.normal_color], labels=['Abnormal', 'Normal'],
-    #                       number_of_col_in_legend=2, plot_name="[New Split]Normal to Abnormal ratio")
+    #                       number_of_col_in_legend=number_of_col_in_legend, save_name="[New Split]Normal to Abnormal ratio")
     # # indexed ratio
     # plot.plot_stacked_bar(num=5, xs=["t_ratio", "no_index_ratio"], ys=["split"],
     #                       colors=[plot.indexed_color, plot.no_index_color], labels=['Indexed', 'No Indexing'],
-    #                       number_of_col_in_legend=2, plot_name="[New Split]Indexed to No Indexing ratio")
+    #                       number_of_col_in_legend=number_of_col_in_legend, save_name="[New Split]Indexed to No Indexing ratio")
     # # empty mesh ratio
     # plot.plot_stacked_bar(num=6, xs=["t_ratio", "no_mesh_ratio"], ys=["split"],
     #                       colors=[plot.mesh_color, plot.no_mesh_color], labels=['MeSH', 'No MeSH'],
-    #                       number_of_col_in_legend=2, plot_name="[New Split]MeSH to No MeSH ratio")
+    #                       number_of_col_in_legend=number_of_col_in_legend, save_name="[New Split]MeSH to No MeSH ratio")
     # plt.show()
     timer.time_executed(start_time, "R2Gen.Analysis")
 
