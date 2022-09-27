@@ -1,0 +1,173 @@
++ export PATH=/media/compute/homes/tmandal/.pyenv/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/envs/r2gen/bin:/media/compute/homes/tmandal/.local/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/condabin:/media/compute/homes/tmandal/.pyenv/plugins/pyenv-virtualenv/shims:/media/compute/homes/tmandal/.pyenv/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/bin:/media/compute/homes/tmandal/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/opt/thinlinc/bin
++ PATH=/media/compute/homes/tmandal/.pyenv/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/envs/r2gen/bin:/media/compute/homes/tmandal/.local/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/condabin:/media/compute/homes/tmandal/.pyenv/plugins/pyenv-virtualenv/shims:/media/compute/homes/tmandal/.pyenv/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/bin:/media/compute/homes/tmandal/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/opt/thinlinc/bin
+++ pyenv init -
++ eval 'export PYENV_SHELL=bash
+source '\''/media/compute/homes/tmandal/.pyenv/libexec/../completions/pyenv.bash'\''
+command pyenv rehash 2>/dev/null
+pyenv() {
+  local command
+  command="${1:-}"
+  if [ "$#" -gt 0 ]; then
+    shift
+  fi
+
+  case "$command" in
+  activate|deactivate|rehash|shell)
+    eval "$(pyenv "sh-$command" "$@")"
+    ;;
+  *)
+    command pyenv "$command" "$@"
+    ;;
+  esac
+}'
+++ export PYENV_SHELL=bash
+++ PYENV_SHELL=bash
+++ source /media/compute/homes/tmandal/.pyenv/libexec/../completions/pyenv.bash
++++ complete -F _pyenv pyenv
+++ command pyenv rehash
+++ pyenv virtualenv-init -
+++ local command
+++ command=virtualenv-init
+++ '[' 2 -gt 0 ']'
+++ shift
+++ case "$command" in
+++ command pyenv virtualenv-init -
+++ pyenv virtualenv-init -
++ eval 'export PATH="/media/compute/homes/tmandal/.pyenv/plugins/pyenv-virtualenv/shims:${PATH}";
+export PYENV_VIRTUALENV_INIT=1;
+_pyenv_virtualenv_hook() {
+  local ret=$?
+  if [ -n "$VIRTUAL_ENV" ]; then
+    eval "$(pyenv sh-activate --quiet || pyenv sh-deactivate --quiet || true)" || true
+  else
+    eval "$(pyenv sh-activate --quiet || true)" || true
+  fi
+  return $ret
+};
+if ! [[ "$PROMPT_COMMAND" =~ _pyenv_virtualenv_hook ]]; then
+  PROMPT_COMMAND="_pyenv_virtualenv_hook;$PROMPT_COMMAND";
+fi'
+++ export PATH=/media/compute/homes/tmandal/.pyenv/plugins/pyenv-virtualenv/shims:/media/compute/homes/tmandal/.pyenv/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/envs/r2gen/bin:/media/compute/homes/tmandal/.local/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/condabin:/media/compute/homes/tmandal/.pyenv/plugins/pyenv-virtualenv/shims:/media/compute/homes/tmandal/.pyenv/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/bin:/media/compute/homes/tmandal/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/opt/thinlinc/bin
+++ PATH=/media/compute/homes/tmandal/.pyenv/plugins/pyenv-virtualenv/shims:/media/compute/homes/tmandal/.pyenv/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/envs/r2gen/bin:/media/compute/homes/tmandal/.local/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/condabin:/media/compute/homes/tmandal/.pyenv/plugins/pyenv-virtualenv/shims:/media/compute/homes/tmandal/.pyenv/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/bin:/media/compute/homes/tmandal/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/opt/thinlinc/bin
+++ export PYENV_VIRTUALENV_INIT=1
+++ PYENV_VIRTUALENV_INIT=1
+++ [[ '' =~ _pyenv_virtualenv_hook ]]
+++ PROMPT_COMMAND='_pyenv_virtualenv_hook;'
++ pyenv local miniconda3-latest
++ local command
++ command=local
++ '[' 2 -gt 0 ']'
++ shift
++ case "$command" in
++ command pyenv local miniconda3-latest
++ pyenv local miniconda3-latest
++ cd /media/compute/homes/tmandal/projects/R2Gen
++ python main.py --image_dir ../data/iu_xray/r2gen/images/ --dataset_name iu_xray --threshold 3 --batch_size 16 --epochs 2 --step_size 50 --gamma 0.1 --seed 9223 --ann_path data/iu_xray/r2gen/annotation.json --save_dir ../r2gen_results/iu_xray --train_sample 0 --val_sample 0 --test_sample 0 --create_r2gen_kaggle_association 0 --iu_mesh_impression_path data/iu_xray/kaggle/iu_mesh_impression.json --resume ../r2gen_results/iu_xray/iu_xray-exp_2_max_seq_length_100_is_print_0_remove_annotation_1_is_new_random_split_0-stdout_1776_0-model_best.pth --is_print 1 --remove_annotation 1 --val_test_partial_data 2 --max_seq_length 100 --exp 2
+Loading checkpoint: ../r2gen_results/iu_xray/iu_xray-exp_2_max_seq_length_100_is_print_0_remove_annotation_1_is_new_random_split_0-stdout_1776_0-model_best.pth ...
+Checkpoint loaded. Resume training from epoch 2
+VAL-BATCH (output):
+ CXR917_IM-2419->GT:  are stable xxxx sternotomy xxxx . the heart and mediastinal contours are unchanged . the lungs are clear without focal infiltrate . there is no effusion or pneumothorax .
+ CXR917_IM-2419->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . 
+ CXR3959_IM-2023->GT:  lungs are clear . heart size is normal . no pneumothorax . sternotomy xxxx overlie the heart .
+ CXR3959_IM-2023->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . 
+ CXR150_IM-0325-0001->GT:  size mediastinal contour and pulmonary vascularity are within normal limits . no focal consolidation suspicious pulmonary opacity large pleural effusion or pneumothorax is identified . visualized osseous structures appear intact .
+ CXR150_IM-0325-0001->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . 
+ CXR2701_IM-1169->GT:  heart and lungs have xxxx xxxx in the interval . both lungs are clear and expanded . heart and mediastinum normal .
+ CXR2701_IM-1169->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . 
+TEST-BATCH (output):
+ CXR738_IM-2296->GT:  heart and lungs have xxxx xxxx in the interval . both lungs are clear and expanded . heart and mediastinum normal .
+ CXR738_IM-2296->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . 
+ CXR3751_IM-1875->GT:  lungs are clear without evidence of focal airspace disease . there is no evidence of pneumothorax or large pleural effusion . the cardiac and mediastinal contours are within normal limits . the xxxx are unremarkable .
+ CXR3751_IM-1875->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . 
+ CXR2780_IM-1218->GT:  heart and lungs have xxxx xxxx in the interval . both lungs are clear and expanded . heart and mediastinum normal .
+ CXR2780_IM-1218->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . 
+ CXR870_IM-2391->GT:  heart and lungs have xxxx xxxx in the interval . both lungs are clear and expanded . heart and mediastinum normal .
+ CXR870_IM-2391->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . 
+ CXR2204_IM-0813->GT:  heart and lungs have xxxx xxxx in the interval . both lungs are clear and expanded . heart and mediastinum normal .
+ CXR2204_IM-0813->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . 
+ CXR43_IM-2070->GT:  heart and lungs have xxxx xxxx in the interval . both lungs are clear and expanded . heart and mediastinum normal .
+ CXR43_IM-2070->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . 
+ CXR1771_IM-0505->GT:  heart and lungs have xxxx xxxx in the interval . both lungs are clear and expanded . heart and mediastinum normal .
+ CXR1771_IM-0505->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . 
+ CXR485_IM-2109->GT:  heart and lungs have xxxx xxxx in the interval . both lungs are clear and expanded . heart and mediastinum normal .
+ CXR485_IM-2109->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . 
+ CXR3902_IM-1981->GT:  heart and lungs have xxxx xxxx in the interval . both lungs are clear and expanded . heart and mediastinum normal .
+ CXR3902_IM-1981->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . 
+ CXR1487_IM-0314->GT:  heart and lungs have xxxx xxxx in the interval . both lungs are clear and expanded . heart and mediastinum normal .
+ CXR1487_IM-0314->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . 
+ CXR3532_IM-1726->GT:  heart and lungs have xxxx xxxx in the interval . both lungs are clear and expanded . heart and mediastinum normal .
+ CXR3532_IM-1726->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . 
+ CXR1891_IM-0580->GT:  heart and lungs have xxxx xxxx in the interval . both lungs are clear and expanded . heart and mediastinum normal .
+ CXR1891_IM-0580->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . 
+ CXR39_IM-1978->GT:  heart and lungs have xxxx xxxx in the interval . both lungs are clear and expanded . heart and mediastinum normal .
+ CXR39_IM-1978->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . 
+ CXR3085_IM-1444->GT:  cardiomediastinal contours . <unk> pneumothorax focal lung consolidation or pleural effusions .
+ CXR3085_IM-1444->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . 
+ CXR3707_IM-1851->GT:  may be a subtle airspace opacity in the right base near the <unk> line . there is no pleural effusion or pneumothorax . the heart and mediastinum are normal . the skeletal structures are normal .
+ CXR3707_IM-1851->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . 
+ CXR3171_IM-1494->GT:  heart and lungs have xxxx xxxx in the interval . both lungs are clear and expanded . heart and mediastinum normal .
+ CXR3171_IM-1494->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . 
+TEST-BATCH (output):
+ /media/compute/homes/tmandal/projects/R2Gen/modules/trainer.py:124: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  record_table = record_table.append(self.best_recorder['val'], ignore_index=True)
+/media/compute/homes/tmandal/projects/R2Gen/modules/trainer.py:125: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  record_table = record_table.append(self.best_recorder['test'], ignore_index=True)
+CXR613_IM-2200->GT:  heart and lungs have xxxx xxxx in the interval . both lungs are clear and expanded . heart and mediastinum normal .
+ CXR613_IM-2200->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . 
+ CXR3933_IM-2004->GT:  heart size is normal . no pneumothorax . no large pleural effusions . no focal airspace opacities .
+ CXR3933_IM-2004->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . 
+ CXR3975_IM-2035->GT:  focal consolidation . no visualized pneumothorax . no large pleural effusions . heart size normal . cardiomediastinal silhouette is unremarkable .
+ CXR3975_IM-2035->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . 
+ CXR1610_IM-0395->GT:  heart and lungs have xxxx xxxx in the interval . both lungs are clear and expanded . heart and mediastinum normal .
+ CXR1610_IM-0395->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . 
+ CXR679_IM-2251->GT:  sternotomy xxxx are intact and unchanged position from prior exam . lungs are clear bilaterally with no focal infiltrate pleural effusion or pneumothoraces . cardiomediastinal silhouette is within normal limits . xxxx and soft tissues are unremarkable .
+ CXR679_IM-2251->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . 
+ CXR3898_IM-1978->GT:  cardiomediastinal silhouette is normal in size and contour . no focal consolidation pneumothorax or large pleural effusion . normal xxxx .
+ CXR3898_IM-1978->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . 
+ CXR3578_IM-1758->GT:  heart and lungs have xxxx xxxx in the interval . both lungs are clear and expanded . heart and mediastinum normal .
+ CXR3578_IM-1758->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . 
+ CXR2108_IM-0738->GT:  heart and lungs have xxxx xxxx in the interval . both lungs are clear and expanded . heart and mediastinum normal .
+ CXR2108_IM-0738->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . 
+ CXR458_IM-2089->GT:  lungs are clear . the heart and pulmonary xxxx are normal . the pleural spaces are clear . mediastinal contours are normal . bony overlap in the lung apices could obscure a small pulmonary nodule .
+ CXR458_IM-2089->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . 
+	epoch          : 2
+	train_loss     : 2.8202662211198075
+	val_BLEU_1     : 0.491071428567044
+	val_BLEU_2     : 0.3090082702928425
+	val_BLEU_3     : 0.22251674800377969
+	val_BLEU_4     : 0.16034663147302658
+	val_METEOR     : 0.2092547602506006
+	val_ROUGE_L    : 0.4151258636200871
+	test_BLEU_1    : 0.43131462333761994
+	test_BLEU_2    : 0.21209369090630553
+	test_BLEU_3    : 0.1261775227854383
+	test_BLEU_4    : 0.06044388527248641
+	test_METEOR    : 0.19045735473745729
+	test_ROUGE_L   : 0.3588292314691878
+epoch: 2 ended: time.struct_time(tm_year=2022, tm_mon=9, tm_mday=27, tm_hour=9, tm_min=25, tm_sec=14, tm_wday=1, tm_yday=270, tm_isdst=1)
+('epoch: 2', ' executed for 00:02:21.68')
+Saving checkpoint: ../r2gen_results/iu_xray/current_checkpoint.pth ...
+Saving current best: model_best.pth ...
+Best results (w.r.t BLEU_4) in validation set:
+	val_BLEU_4     : 0.16034663147302658
+	epoch          : 2
+	train_loss     : 2.8202662211198075
+	val_BLEU_1     : 0.491071428567044
+	val_BLEU_2     : 0.3090082702928425
+	val_BLEU_3     : 0.22251674800377969
+	val_METEOR     : 0.2092547602506006
+	val_ROUGE_L    : 0.4151258636200871
+	test_BLEU_1    : 0.43131462333761994
+	test_BLEU_2    : 0.21209369090630553
+	test_BLEU_3    : 0.1261775227854383
+	test_BLEU_4    : 0.06044388527248641
+	test_METEOR    : 0.19045735473745729
+	test_ROUGE_L   : 0.3588292314691878
+Best results (w.r.t BLEU_4) in test set:
+	test_BLEU_4    : 0.14369495451311132
+R2Gen ended: time.struct_time(tm_year=2022, tm_mon=9, tm_mday=27, tm_hour=9, tm_min=25, tm_sec=29, tm_wday=1, tm_yday=270, tm_isdst=1)
+('R2Gen', ' executed for 00:02:52.97')
+
+real	2m57.347s
+user	8m18.039s
+sys	0m42.886s
