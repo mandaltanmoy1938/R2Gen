@@ -110,13 +110,12 @@ class BaseTrainer(object):
         if not os.path.exists(self.args.record_dir):
             os.makedirs(self.args.record_dir)
         # exp setup
-        record_path = os.path.join(
-            self.args.record_dir,
-            "{}-exp_{}_val_test_partial_data_{}_max_seq_length_{}_" +
-            "is_print_{}_remove_annotation_{}_is_new_random_split_{}-.csv".format(
-                self.args.dataset_name, self.args.exp, self.args.val_test_partial_data, self.args.max_seq_length,
-                self.args.is_print,
-                self.args.remove_annotation, self.args.is_new_random_split))
+        record_path = os.path.join(self.args.record_dir,
+                                   "{}-exp_{}_val_test_partial_data_{}_max_seq_length_{}_is_print_{}_remove_annotation_{}_is_new_random_split_{}-.csv".
+                                   format(
+                                       self.args.dataset_name, self.args.exp, self.args.val_test_partial_data,
+                                       self.args.max_seq_length, self.args.is_print, self.args.remove_annotation,
+                                       self.args.is_new_random_split))
         ########################################################################################################
         if not os.path.exists(record_path):
             record_table = pd.DataFrame()
