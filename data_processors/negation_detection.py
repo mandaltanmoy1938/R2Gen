@@ -7,29 +7,34 @@ from negspacy.negation import Negex
 class NegationDetection(object):
     def __init__(self, args):
         self.args = args
-        self.nlp0 = spacy.load("en_core_sci_sm")
-        self.termset = termset("en_clinical")
-        self.nlp1 = spacy.load("en_ner_bc5cdr_md")
+        self.nlp_model_sci = spacy.load("en_core_sci_sm")
+        self.nlp_model_bc5cdr = spacy.load("en_ner_bc5cdr_md")
+        self.clinical_termset = termset("en_clinical")
         # self.entities = ["DISEASE", "TEST", "TREATMENT", "NEG_ENTITY"]
-        self.nlp0.add_pipe("negex", config={"ent_types": ["DISEASE", "TEST", "TREATMENT", "ORGAN", "NEG_ENTITY"]})
-        self.nlp1.add_pipe("negex", config={"ent_types": ["DISEASE", "TEST", "TREATMENT", "ORGAN", "NEG_ENTITY"]})
-
-    def get_lemmatize_doc_object(self, report):
-        self.termset.add_patterns({
+        self.clinical_termset.add_patterns({
             "pseudo_negations": ["normal", "stable"],
-            # "preceding_negations": ["normal", "stable"],
-            # "following_negations": ["normal", "stable"],
+            "preceding_negations": ["no", "free of"],
+            "following_negations": ["normal", "stable"],
         })
-        # print(self.termset.get_patterns())
-        for sentence in report["report"].split('.'):
-            lem_sentence = self.lemmatize(sentence, self.nlp0)
-            self.print_negation(self.nlp1(lem_sentence))
+        self.nlp_model_sci.add_pipe("negex", config={"neg_termset": self.clinical_termset.get_patterns()})
+        self.nlp_model_bc5cdr.add_pipe("negex", config={"neg_termset": self.clinical_termset.get_patterns()})
 
-    def lemmatize(self, report, nlp):
-        doc = nlp(report)
+    def get_doc_object(self, report):
+        print("id:", report["id"])
+        for sentence in report["report"].split('.'):
+            # lem_sentence = self.lemmatize(sentence, self.nlp0)
+            sentence = sentence.strip()
+            if not sentence:
+                continue
+            print("sent: ", sentence)
+            self.print_negation(self.nlp_model_sci(sentence), "sci")
+            self.print_negation(self.nlp_model_bc5cdr(sentence), "bc5cdr")
+
+    def lemmatize(self, report, nlp_model):
+        doc = nlp_model(report)
         lemNote = [wd.lemma_ for wd in doc]
         return " ".join(lemNote)
 
-    def print_negation(self, doc):
+    def print_negation(self, doc, model):
         for entity in doc.ents:
-            print(entity.text, entity._.negex)
+            print(model, ":", entity.text, entity._.negex, entity.label_)
