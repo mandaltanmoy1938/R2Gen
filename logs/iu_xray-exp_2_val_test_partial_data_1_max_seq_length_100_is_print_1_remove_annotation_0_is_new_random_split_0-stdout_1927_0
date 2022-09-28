@@ -1,0 +1,962 @@
++ export PATH=/media/compute/homes/tmandal/.pyenv/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/envs/r2gen/bin:/media/compute/homes/tmandal/.local/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/condabin:/media/compute/homes/tmandal/.pyenv/plugins/pyenv-virtualenv/shims:/media/compute/homes/tmandal/.pyenv/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/bin:/media/compute/homes/tmandal/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/opt/thinlinc/bin
++ PATH=/media/compute/homes/tmandal/.pyenv/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/envs/r2gen/bin:/media/compute/homes/tmandal/.local/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/condabin:/media/compute/homes/tmandal/.pyenv/plugins/pyenv-virtualenv/shims:/media/compute/homes/tmandal/.pyenv/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/bin:/media/compute/homes/tmandal/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/opt/thinlinc/bin
+++ pyenv init -
++ eval 'export PYENV_SHELL=bash
+source '\''/media/compute/homes/tmandal/.pyenv/libexec/../completions/pyenv.bash'\''
+command pyenv rehash 2>/dev/null
+pyenv() {
+  local command
+  command="${1:-}"
+  if [ "$#" -gt 0 ]; then
+    shift
+  fi
+
+  case "$command" in
+  activate|deactivate|rehash|shell)
+    eval "$(pyenv "sh-$command" "$@")"
+    ;;
+  *)
+    command pyenv "$command" "$@"
+    ;;
+  esac
+}'
+++ export PYENV_SHELL=bash
+++ PYENV_SHELL=bash
+++ source /media/compute/homes/tmandal/.pyenv/libexec/../completions/pyenv.bash
++++ complete -F _pyenv pyenv
+++ command pyenv rehash
+++ pyenv virtualenv-init -
+++ local command
+++ command=virtualenv-init
+++ '[' 2 -gt 0 ']'
+++ shift
+++ case "$command" in
+++ command pyenv virtualenv-init -
+++ pyenv virtualenv-init -
++ eval 'export PATH="/media/compute/homes/tmandal/.pyenv/plugins/pyenv-virtualenv/shims:${PATH}";
+export PYENV_VIRTUALENV_INIT=1;
+_pyenv_virtualenv_hook() {
+  local ret=$?
+  if [ -n "$VIRTUAL_ENV" ]; then
+    eval "$(pyenv sh-activate --quiet || pyenv sh-deactivate --quiet || true)" || true
+  else
+    eval "$(pyenv sh-activate --quiet || true)" || true
+  fi
+  return $ret
+};
+if ! [[ "$PROMPT_COMMAND" =~ _pyenv_virtualenv_hook ]]; then
+  PROMPT_COMMAND="_pyenv_virtualenv_hook;$PROMPT_COMMAND";
+fi'
+++ export PATH=/media/compute/homes/tmandal/.pyenv/plugins/pyenv-virtualenv/shims:/media/compute/homes/tmandal/.pyenv/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/envs/r2gen/bin:/media/compute/homes/tmandal/.local/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/condabin:/media/compute/homes/tmandal/.pyenv/plugins/pyenv-virtualenv/shims:/media/compute/homes/tmandal/.pyenv/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/bin:/media/compute/homes/tmandal/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/opt/thinlinc/bin
+++ PATH=/media/compute/homes/tmandal/.pyenv/plugins/pyenv-virtualenv/shims:/media/compute/homes/tmandal/.pyenv/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/envs/r2gen/bin:/media/compute/homes/tmandal/.local/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/condabin:/media/compute/homes/tmandal/.pyenv/plugins/pyenv-virtualenv/shims:/media/compute/homes/tmandal/.pyenv/bin:/media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/bin:/media/compute/homes/tmandal/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/opt/thinlinc/bin
+++ export PYENV_VIRTUALENV_INIT=1
+++ PYENV_VIRTUALENV_INIT=1
+++ [[ '' =~ _pyenv_virtualenv_hook ]]
+++ PROMPT_COMMAND='_pyenv_virtualenv_hook;'
++ pyenv local miniconda3-latest
++ local command
++ command=local
++ '[' 2 -gt 0 ']'
++ shift
++ case "$command" in
++ command pyenv local miniconda3-latest
++ pyenv local miniconda3-latest
++ cd /media/compute/homes/tmandal/projects/R2Gen
++ python main.py --image_dir ../data/iu_xray/r2gen/images/ --dataset_name iu_xray --threshold 3 --batch_size 16 --epochs 2 --step_size 50 --gamma 0.1 --seed 9223 --ann_path data/iu_xray/r2gen/annotation.json --save_dir ../r2gen_results/iu_xray --train_sample 0 --val_sample 0 --test_sample 0 --create_r2gen_kaggle_association 0 --iu_mesh_impression_path data/iu_xray/kaggle/iu_mesh_impression.json --resume ../r2gen_results/iu_xray/iu_xray-exp_2_max_seq_length_100_is_print_0_remove_annotation_1_is_new_random_split_0-stdout_1776_0-model_best.pth --is_print 1 --remove_annotation 0 --val_test_partial_data 1 --max_seq_length 100 --exp 2
+Loading checkpoint: ../r2gen_results/iu_xray/iu_xray-exp_2_max_seq_length_100_is_print_0_remove_annotation_1_is_new_random_split_0-stdout_1776_0-model_best.pth ...
+Checkpoint loaded. Resume training from epoch 2
+VAL-BATCH (output):
+ CXR2056_IM-0694-1001->GT:  heart size is upper limits of normal . the pulmonary xxxx and mediastinum are within normal limits . there is no pleural effusion or pneumothorax . there is no focal air space opacity to suggest a pneumonia .
+ CXR2056_IM-0694-1001->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2316_IM-0889->GT:  lungs are clear . the cardiomediastinal silhouette is within normal limits . no pneumothorax or pleural effusion .
+ CXR2316_IM-0889->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3289_IM-1570->GT:  cardiac size and contour unremarkable mediastinal silhouette . normal pulmonary xxxx . lungs clear no airspace disease pleural effusion or pneumothorax .
+ CXR3289_IM-1570->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1141_IM-0096->GT:  lungs are clear and expanded . heart and mediastinum normal .
+ CXR1141_IM-0096->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2791_IM-1225->GT:  heart size and pulmonary vascularity appear within normal limits . the lungs are free of focal airspace disease . no pleural effusion or pneumothorax is seen .
+ CXR2791_IM-1225->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3266_IM-1551->GT:  silhouette and pulmonary vasculature are within normal limits . lungs are clear . no pneumothorax or pleural effusion . no acute osseous findings .
+ CXR3266_IM-1551->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR24_IM-0949->GT:  silhouette is within normal limits of size and appearance . the pulmonary vascularity is unremarkable . lungs are expanded and clear of airspace disease . negative for pneumothorax or pleural effusion . limited bone evaluation reveals no acute abnormality . there is incompletely evaluated lumbar levoscoliosis .
+ CXR24_IM-0949->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR3664_IM-1822->GT:  are no acute osseous abnormalities . soft tissue structures are within normal limits . normal heart size and hilar vascular markings . the lungs are clear without focal area of consolidation pleural effusion pneumothorax .
+ CXR3664_IM-1822->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3826_IM-1932->GT:  size and cardiomediastinal contours are normal . lungs are clear without focal air space opacity pleural effusion or pneumothorax . osseous structures are intact .
+ CXR3826_IM-1932->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3588_IM-1766->GT:  xxxx and lateral chest examination was obtained . the heart silhouette is normal in size and contour . aortic xxxx appear unremarkable . lungs demonstrate no acute findings . there is no effusion or pneumothorax .
+ CXR3588_IM-1766->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3598_IM-1775->GT:  size within normal limits stable mediastinal and hilar contours . no focal alveolar consolidation no definite pleural effusion seen . no typical findings of pulmonary edema . xxxx <unk> also present on the previous exam .
+ CXR3598_IM-1775->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2120_IM-0747->GT:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear .
+ CXR2120_IM-0747->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2668_IM-1147->GT:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear .
+ CXR2668_IM-1147->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2735_IM-1189->GT:  lungs are clear and expanded . heart and mediastinum normal .
+ CXR2735_IM-1189->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2988_IM-1375->GT:  cardiomediastinal silhouette is normal size and configuration . pulmonary vasculature within normal limits . the lungs are well-aerated . there is no pneumothorax pleural effusion or focal consolidation .
+ CXR2988_IM-1375->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1954_IM-0622->GT:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear .
+ CXR1954_IM-0622->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+VAL-BATCH (output):
+ CXR2998_IM-1382->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality . no displaced rib fractures identified .
+ CXR2998_IM-1382->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR799_IM-2333->GT:  size and mediastinal contours are within normal limits . no focal airspace consolidation . no suspicious pulmonary nodules or masses . no evidence of pleural effusion or pneumothorax . no evidence of acute osseous abnormality .
+ CXR799_IM-2333->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR839_IM-2363->GT:  size normal . no pleural effusions or pneumothorax . lungs are clear . soft tissues and xxxx are unremarkable .
+ CXR839_IM-2363->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1067_IM-0048->GT:  are clear without focal consolidation effusion or pneumothorax . normal heart size . no suspicious pulmonary nodules or masses . bony thorax and soft tissues grossly unremarkable .
+ CXR1067_IM-0048->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR2856_IM-1263->GT:  heart size . no focal airspace consolidation pneumothorax pleural effusion or pulmonary edema . no focal bony abnormality .
+ CXR2856_IM-1263->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR2432_IM-0974->GT:  cardiomediastinal silhouette and pulmonary vasculature are within normal limits in size . the lungs are clear of focal airspace disease pneumothorax or pleural effusion . there are no acute bony findings .
+ CXR2432_IM-0974->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR319_IM-1505->GT:  heart size . clear lungs . no pneumothorax . no pleural effusion .
+ CXR319_IM-1505->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR2567_IM-1069->GT:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear .
+ CXR2567_IM-1069->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2665_IM-1145->GT:  focal lung consolidation . heart size and pulmonary vascularity are within normal limits . no pneumothorax or pleural effusion . osseous structures are grossly intact .
+ CXR2665_IM-1145->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR283_IM-1248->GT:  lungs are clear . the cardiomediastinal silhouette is within normal limits . no pleural effusion is identified .
+ CXR283_IM-1248->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR345_IM-1672->GT:  silhouette and pulmonary vasculature are within normal limits . lungs are clear . no pneumothorax or pleural effusion . no acute osseous findings . xxxx degenerative changes of the thoracic spine .
+ CXR345_IM-1672->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR909_IM-2414->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR909_IM-2414->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3261_IM-1547->GT:  size normal . lungs are clear . xxxx are normal . no pneumonia effusions edema pneumothorax adenopathy nodules or masses .
+ CXR3261_IM-1547->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3535_IM-1728-0001->GT:  lungs are clear . the heart and pulmonary xxxx are normal . pleural spaces are clear . mediastinal contours are normal .
+ CXR3535_IM-1728-0001->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1810_IM-0524->GT:  heart is normal size . the mediastinum is unremarkable . there is no pleural effusion pneumothorax or focal airspace disease . the xxxx are unremarkable .
+ CXR1810_IM-0524->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1055_IM-0040->GT:  heart is normal in size and contour . the lungs are clear without evidence of infiltrate . there is no pneumothorax or effusion .
+ CXR1055_IM-0040->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+VAL-BATCH (output):
+ CXR731_IM-2291->GT:  lungs are clear and without focal air space opacity . the cardiomediastinal silhouette is normal in size and contour . there is no pneumothorax or large pleural effusion .
+ CXR731_IM-2291->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2663_IM-1144->GT:  lungs are clear . no pleural effusion or pneumothorax is identified . the heart and mediastinum are normal . the skeletal structures and soft tissues are normal .
+ CXR2663_IM-1144->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3135_IM-1474->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardiomediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR3135_IM-1474->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR1502_IM-0328->GT:  lungs are clear . there is no pleural effusion or pneumothorax . the heart and mediastinum are normal . the skeletal structures are normal .
+ CXR1502_IM-0328->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR977_IM-2465->GT:  heart is normal in size and contour . the lungs are clear without evidence of infiltrate . there is no pneumothorax or effusion .
+ CXR977_IM-2465->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2260_IM-0852->GT:  cardiomediastinal silhouette is normal in size and contour . no focal consolidation pneumothorax or large pleural effusion . negative for acute bone abnormality .
+ CXR2260_IM-0852->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2083_IM-0715->GT:  are clear bilaterally . cardiac and mediastinal silhouettes are normal . pulmonary vasculature is normal . no pneumothorax or pleural effusion . no acute bony abnormality .
+ CXR2083_IM-0715->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2964_IM-1357->GT:  lungs are clear . there is no focal airspace consolidation . no pleural effusion or pneumothorax . heart size and mediastinal contour are normal .
+ CXR2964_IM-1357->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2068_IM-0701->GT:  lungs are clear . the cardiomediastinal silhouette is within normal limits . no pneumothorax or pleural effusion .
+ CXR2068_IM-0701->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR971_IM-2461->GT:  heart size mediastinal contours . no focal airspace consolidation . no hyperexpansion of the lungs . no pleural effusion or pneumothorax .
+ CXR971_IM-2461->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1698_IM-0458->GT:  and mediastinal contours are unremarkable . pulmonary vascularity is within normal limits . no focal air space opacities pleural effusion or pneumothorax . xxxx are grossly unremarkable .
+ CXR1698_IM-0458->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR970_IM-2460->GT:  are clear bilaterally with no focal infiltrate pleural effusion or pneumothoraces . cardiomediastinal silhouette is within normal limits . xxxx and soft tissues are unremarkable .
+ CXR970_IM-2460->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR270_IM-1168->GT:  cardiomediastinal silhouette and pulmonary vasculature are within normal limits in size . the lungs are clear of focal airspace disease pneumothorax or pleural effusion . there are no acute bony findings .
+ CXR270_IM-1168->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2395_IM-0944->GT:  cardiomediastinal contours . lungs are clear . no pneumothorax .
+ CXR2395_IM-0944->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2806_IM-1236->GT:  size is normal lungs are clear . no edema or effusions .
+ CXR2806_IM-1236->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2899_IM-1301->GT:  cardiomediastinal silhouette and pulmonary vasculature are within normal limits in size . the lungs are clear of focal airspace disease pneumothorax or pleural effusion . there are no acute bony findings .
+ CXR2899_IM-1301->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+VAL-BATCH (output):
+ CXR1659_IM-0434->GT:  size within normal limits . no focal airspace disease . no pneumothorax no pleural effusion . no displaced rib fractures .
+ CXR1659_IM-0434->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2730_IM-1189->GT:  images . heart size and pulmonary vascular engorgement appear within limits of normal . mediastinal contour is unremarkable . no focal consolidation pleural effusion or pneumothorax identified . no convincing acute bony findings .
+ CXR2730_IM-1189->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR842_IM-2366->GT:  silhouette and pulmonary vasculature are within normal limits . lungs are clear . no pneumothorax or pleural effusion . no <unk> foreign bodies noted . no acute osseous findings .
+ CXR842_IM-2366->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1922_IM-0598->GT:  xxxx mediastinum xxxx bony structures and lung xxxx are unremarkable .
+ CXR1922_IM-0598->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3679_IM-1831->GT:  heart . clear lungs . no pneumothorax . no pleural effusion .
+ CXR3679_IM-1831->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR36_IM-1776->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR36_IM-1776->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1533_IM-0344->GT:  lungs are clear . the cardiomediastinal silhouette is within normal limits . no pleural effusion is identified .
+ CXR1533_IM-0344->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1684_IM-0449->GT:  heart is normal in size . the pulmonary vascularity is within normal limits in appearance . no focal air space opacities . no pleural effusions or pneumothorax . no acute bony abnormalities .
+ CXR1684_IM-0449->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3298_IM-1575->GT:  size is within normal limits . no focal airspace consolidations . no pneumothorax or pleural effusion .
+ CXR3298_IM-1575->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . <sep>
+ CXR734_IM-2293-0001->GT:  pneumothorax . heart size is normal . no large pleural effusions . no focal airspace consolidation .
+ CXR734_IM-2293-0001->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2893_IM-1295->GT:  are clear bilaterally with no focal infiltrate pleural effusion or pneumothoraces . cardiomediastinal silhouette is within normal limits . xxxx and soft tissues are unremarkable .
+ CXR2893_IM-1295->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1477_IM-0309->GT:  size within normal limits . no focal alveolar consolidation no definite pleural effusion seen . no typical findings of pulmonary edema . no pneumothorax .
+ CXR1477_IM-0309->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR2993_IM-1380->GT:  lungs are clear without focal consolidation effusion or pneumothorax . normal heart size . bony thorax and soft tissues grossly unremarkable .
+ CXR2993_IM-1380->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR863_IM-2383->GT:  focal consolidation . no visualized pneumothorax . the heart size is normal . no large pleural effusions . the cardiomediastinal silhouette is grossly unremarkable .
+ CXR863_IM-2383->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR2583_IM-1081->GT:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear .
+ CXR2583_IM-1081->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR1779_IM-0509->GT:  size normal . lungs are clear . xxxx are normal . no pneumonia effusions edema pneumothorax adenopathy nodules or masses .
+ CXR1779_IM-0509->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+VAL-BATCH (output):
+ CXR1207_IM-0140-0001->GT:  lungs are clear . the heart and pulmonary xxxx are normal . the pleural spaces are clear . mediastinal contours are normal . there is no pneumothorax .
+ CXR1207_IM-0140-0001->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR330_IM-1577-0001->GT:  size mediastinal contour and pulmonary vascularity are within normal limits . no focal consolidation suspicious pulmonary opacity large pleural effusion or pneumothorax is identified . visualized osseous structures appear intact .
+ CXR330_IM-1577-0001->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3346_IM-1604->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR3346_IM-1604->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1469_IM-0303->GT:  is no focal airspace consolidation or pleural effusion . heart size is normal . no pneumothorax .
+ CXR1469_IM-0303->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3577_IM-1758->GT:  are no focal areas of consolidation . no suspicious pulmonary opacities . heart size within normal limits . no pleural effusions . no evidence of pneumothorax . osseous structures intact .
+ CXR3577_IM-1758->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1594_IM-0385->GT:  heart and cardiomediastinal silhouette are normal in size and shape . there is no focal airspace opacity pleural effusion or pneumothorax . the osseous structures are intact .
+ CXR1594_IM-0385->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR3809_IM-1919->GT:  and mediastinal contours are within normal limits . the lungs are clear . bony structures are intact .
+ CXR3809_IM-1919->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3143_IM-1477->GT:  xxxx and lateral chest examination was obtained . the heart silhouette is normal in size and contour . aortic xxxx appear unremarkable . lungs demonstrate no acute findings . there is no effusion or pneumothorax .
+ CXR3143_IM-1477->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3831_IM-1934->GT:  lungs . no infiltrates or suspicious pulmonary opacity . no pleural effusion or pneumothorax . cardiomediastinal silhouette within normal limits .
+ CXR3831_IM-1934->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR1334_IM-0214->GT:  contours are normal . lungs are clear . there is no pneumothorax or large pleural effusion .
+ CXR1334_IM-0214->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR1488_IM-0315->GT:  heart size and pulmonary vascularity appear within normal limits . the lungs are free of focal airspace disease . no pleural effusion or pneumothorax is seen .
+ CXR1488_IM-0315->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2781_IM-1219->GT:  heart . clear lungs . no pneumothorax . no pleural effusion . trachea is midline .
+ CXR2781_IM-1219->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1561_IM-0367->GT:  are clear without focal consolidation effusion or pneumothorax . normal heart size . soft tissues unremarkable .
+ CXR1561_IM-0367->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2238_IM-0835->GT:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear .
+ CXR2238_IM-0835->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1987_IM-0644->GT:  size and mediastinal contours appear within normal limits . pulmonary vascularity is within normal limits . no focal consolidation suspicious pulmonary opacity pneumothorax or definite pleural effusion . visualized osseous structures appear intact .
+ CXR1987_IM-0644->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2459_IM-0991->GT:  heart and mediastinum are unremarkable . the lungs are clear without infiltrate . there is no effusion or pneumothorax .
+ CXR2459_IM-0991->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+VAL-BATCH (output):
+ CXR2933_IM-1336->GT:  heart size . no focal air space consolidation pneumothorax pleural effusion or pulmonary edema . no focal bony abnormality .
+ CXR2933_IM-1336->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2833_IM-1249->GT:  heart pulmonary xxxx and mediastinum are within normal limits . there is no pleural effusion or pneumothorax . there is no focal air space opacity to suggest a pneumonia . both <unk> appear within normal limits on this limited <unk> evaluation .
+ CXR2833_IM-1249->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1078_IM-0055->GT:  lungs are clear . there is no pleural effusion or pneumothorax . the heart and mediastinum are normal . the skeletal structures are normal .
+ CXR1078_IM-0055->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . <sep>
+ CXR881_IM-2396->GT:  lungs are without focal air space opacity . there is no pneumothorax or large pleural effusion . the cardiomediastinal silhouette is normal in size and contour .
+ CXR881_IM-2396->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3167_IM-1491->GT:  are clear bilaterally . cardiac and mediastinal silhouettes are normal . pulmonary vasculature is normal . no pneumothorax or pleural effusion . no acute bony abnormality .
+ CXR3167_IM-1491->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3634_IM-1801->GT:  cardiomediastinal silhouette . no focal pulmonary opacity pleural effusion or pneumothorax . no acute bony abnormality .
+ CXR3634_IM-1801->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1974_IM-0633->GT:  lungs are clear . the cardiomediastinal silhouette is within normal limits . no pneumothorax or pleural effusion .
+ CXR1974_IM-0633->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR444_IM-2079->GT:  heart size is normal . the mediastinal contour is within normal limits . the lungs are free of any focal infiltrates . there are no nodules or masses . no visible pneumothorax . no visible pleural fluid . the xxxx are grossly normal . there is no visible free intraperitoneal air under the diaphragm .
+ CXR444_IM-2079->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1448_IM-0289->GT:  xxxx and lateral views of the chest were obtained on <unk> . the lung volumes are normal . the lungs are clear and there are no pleural effusions . there is stable mild <unk> of the medial aspect of the right diaphragm . the mediastinum and pulmonary xxxx are normal . the bony <unk> are not <unk> .
+ CXR1448_IM-0289->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR508_IM-2125->GT:  heart size and mediastinal contours . no focal airspace consolidation . no pleural effusion or pneumothorax . visualized osseous structures are unremarkable .
+ CXR508_IM-2125->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR737_IM-2295->GT:  size and pulmonary vascular engorgement appear within limits of normal . mediastinal contour is unremarkable . no focal consolidation pleural effusion or pneumothorax identified . no acute bony changes .
+ CXR737_IM-2295->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . <sep>
+ CXR3441_IM-1666->GT:  size and mediastinal contour within normal limits . no focal airspace consolidation pneumothorax or large pleural effusion . no acute osseous abnormality .
+ CXR3441_IM-1666->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1766_IM-0500->GT:  images . heart size and pulmonary vascular engorgement appear within limits of normal . mediastinal contour is unremarkable . no focal consolidation pleural effusion or pneumothorax identified . no convincing acute bony findings .
+ CXR1766_IM-0500->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3122_IM-1467->GT:  cardiomediastinal silhouette is normal size and configuration . pulmonary vasculature within normal limits . the lungs are well-aerated . there is no pneumothorax pleural effusion or focal consolidation .
+ CXR3122_IM-1467->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1356_IM-0231->GT:  heart size . normal mediastinal contour . no pneumothorax airspace consolidation or pleural effusion . no chest xxxx xxxx . no acute bony abnormality .
+ CXR1356_IM-0231->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR284_IM-1252->GT:  cardiomediastinal silhouette is normal in size and contour . no focal consolidation pneumothorax or large pleural effusion . negative for acute displaced rib fracture . no discrete xxxx <unk> visualized . contrast within the bilateral <unk> <unk> <unk> . contrast also probably within the left <unk> .
+ CXR284_IM-1252->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+VAL-BATCH (output):
+ CXR3938_IM-2009->GT:  size normal . lungs are clear . xxxx are normal . no pneumonia effusions edema pneumothorax adenopathy nodules or masses .
+ CXR3938_IM-2009->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . <sep>
+ CXR2596_IM-1086->GT:  cardiomediastinal silhouette and pulmonary vasculature are within normal limits in size . the lungs are clear of focal airspace disease pneumothorax or pleural effusion . there are no acute bony findings .
+ CXR2596_IM-1086->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+TEST-BATCH (output):
+ CXR3030_IM-1405->GT:  cardiomediastinal silhouette . there is no focal consolidation . there are no xxxx of a large pleural effusion . there is no pneumothorax . there is no acute bony abnormality seen .
+ CXR3030_IM-1405->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR38_IM-1911->GT:  are clear . there is no pneumothorax or pleural effusion . the heart and mediastinum are within normal limits . bony structures are intact .
+ CXR38_IM-1911->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR3957_IM-2022->GT:  and mediastinal contours are within normal limits . the lungs are clear . bony structures are intact .
+ CXR3957_IM-2022->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1347_IM-0225->GT:  cardiomediastinal silhouette is normal in size and contour . no focal consolidation pneumothorax or large pleural effusion . negative for acute displaced rib fracture .
+ CXR1347_IM-0225->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2915_IM-1317->GT:  heart size is normal . the mediastinal contour is within normal limits . the lungs are free of any focal infiltrates . there are no nodules or masses . no visible pneumothorax . no visible pleural fluid . the xxxx are grossly normal . there is no visible free intraperitoneal air under the diaphragm .
+ CXR2915_IM-1317->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR34_IM-1644->GT:  heart is normal in size and contour . the lungs are clear without evidence of infiltrate . there is no pneumothorax or effusion .
+ CXR34_IM-1644->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2590_IM-1083->GT:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear .
+ CXR2590_IM-1083->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1176_IM-0119->GT:  lungs and pleural spaces show no acute abnormality . heart size and pulmonary vascularity within normal limits . .
+ CXR1176_IM-0119->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2480_IM-1009->GT:  heart is normal in size and contour . there is no mediastinal widening . the lungs are clear bilaterally . no large pleural effusion or pneumothorax . the xxxx are intact .
+ CXR2480_IM-1009->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3222_IM-1522->GT:  cardiomediastinal silhouette and pulmonary vasculature are within normal limits in size . the lungs are clear of focal airspace disease pneumothorax or pleural effusion . there are no acute bony findings .
+ CXR3222_IM-1522->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1005_IM-0006->GT:  and mediastinal contours are within normal limits . the lungs are clear . bony structures are intact .
+ CXR1005_IM-0006->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3542_IM-1734->GT:  size and mediastinal contours appear within normal limits . pulmonary vascularity is within normal limits . no focal consolidation suspicious pulmonary opacity pneumothorax or definite pleural effusion . visualized osseous structures appear intact .
+ CXR3542_IM-1734->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR325_IM-1539->GT:  are clear . no pleural effusions or pneumothoraces . heart and mediastinum of normal size and contour .
+ CXR325_IM-1539->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2785_IM-1220->GT:  and mediastinal contours are within normal limits . the lungs are clear . bony structures are intact .
+ CXR2785_IM-1220->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3527_IM-1724->GT:  lungs are clear and expanded . heart and mediastinum normal .
+ CXR3527_IM-1724->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR3460_IM-1681->GT:  heart and mediastinum are unremarkable . the lungs are clear without infiltrate . there is no effusion or pneumothorax .
+ CXR3460_IM-1681->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+TEST-BATCH (output):
+ CXR2784_IM-1220->GT:  heart is normal in size and contour . there is no mediastinal widening . the lungs are clear bilaterally . no large pleural effusion or pneumothorax . the xxxx are intact .
+ CXR2784_IM-1220->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1425_IM-0272->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR1425_IM-0272->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR779_IM-2321->GT:  cardiomediastinal silhouette is normal in size and contour . no focal consolidation pneumothorax or large pleural effusion . negative for acute displaced rib fracture .
+ CXR779_IM-2321->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1966_IM-0629->GT:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear .
+ CXR1966_IM-0629->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3765_IM-1884->GT:  cardiomediastinal silhouette is within normal limits for size and contour . the lungs are normally inflated without evidence of focal airspace disease pleural effusion or pneumothorax . osseous structures are within normal limits for patient age .
+ CXR3765_IM-1884->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2686_IM-1158->GT:  size within normal limits . no focal airspace disease . no pneumothorax or effusions .
+ CXR2686_IM-1158->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2354_IM-0918->GT:  are clear . no pneumothorax or pleural effusion . normal heart and mediastinal contours . normal pulmonary vasculature . bony thorax intact .
+ CXR2354_IM-0918->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR3445_IM-1668->GT:  <unk> consolidation atelectasis or infiltrate . no pleural fluid collection or pneumothorax . cardiomediastinal silhouette is within normal limits . xxxx xxxx is intact .
+ CXR3445_IM-1668->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR3734_IM-1866->GT:  are clear bilaterally . cardiac and mediastinal silhouettes are normal . pulmonary vasculature is normal . no pneumothorax or pleural effusion . no acute bony abnormality .
+ CXR3734_IM-1866->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR344_IM-1664->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR344_IM-1664->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3646_IM-1808-0001->GT:  lungs are clear . heart size is normal . no pneumothorax .
+ CXR3646_IM-1808-0001->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1997_IM-0651->GT:  size normal . lungs are clear . xxxx are normal . no pneumonia effusions edema pneumothorax adenopathy nodules or masses .
+ CXR1997_IM-0651->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1440_IM-0284->GT:  and mediastinal contours are within normal limits . the lungs are clear . bony structures are intact .
+ CXR1440_IM-0284->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR1259_IM-0175->GT:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear .
+ CXR1259_IM-0175->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR658_IM-2234->GT:  lungs are clear . the heart and pulmonary xxxx are normal . the pleural spaces are clear . mediastinal contours are normal .
+ CXR658_IM-2234->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1812_IM-0525->GT:  focal consolidation suspicious pulmonary opacity pneumothorax or definite pleural effusion . heart size and pulmonary vascularity within normal limits visualized osseous structures appear intact .
+ CXR1812_IM-0525->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+TEST-BATCH (output):
+ CXR2357_IM-0921->GT:  silhouette and pulmonary vasculature are within normal limits . lungs are clear . no pneumothorax or pleural effusion . no acute osseous findings .
+ CXR2357_IM-0921->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR2232_IM-0832->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardiomediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR2232_IM-0832->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR993_IM-2478->GT:  size normal . lungs are clear . xxxx are normal . no pneumonia effusions edema pneumothorax adenopathy nodules or masses .
+ CXR993_IM-2478->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2734_IM-1189->GT:  cardiomediastinal silhouette is within normal limits for size and contour . the lungs are normally inflated without evidence of focal airspace disease pleural effusion or pneumothorax . osseous structures are within normal limits for patient age .
+ CXR2734_IM-1189->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR461_IM-2090->GT:  cardiomediastinal silhouette is normal size and configuration . pulmonary vasculature within normal limits . the lungs are well-aerated . there is no pneumothorax pleural effusion or focal consolidation .
+ CXR461_IM-2090->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2098_IM-0728->GT:  heart size is normal . lungs are clear . there is no pleural line to suggest pneumothorax or costophrenic xxxx blunting to suggest large pleural effusion . bony structures are within normal limits .
+ CXR2098_IM-0728->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2277_IM-0864->GT:  lungs are clear without evidence of focal airspace disease . there is no evidence of pneumothorax or large pleural effusion . the cardiac and mediastinal contours are within normal limits . the xxxx are unremarkable .
+ CXR2277_IM-0864->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2099_IM-0729->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR2099_IM-0729->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR1633_IM-0414->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR1633_IM-0414->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3883_IM-1971->GT:  pneumothorax pleural effusion or airspace consolidation . heart size and pulmonary vasculature appear within normal limits . xxxx xxxx are intact .
+ CXR3883_IM-1971->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3041_IM-1415->GT:  size normal . lungs are clear . xxxx are normal . no pneumonia effusions edema pneumothorax adenopathy nodules or masses .
+ CXR3041_IM-1415->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR269_IM-1161->GT:  cardiomediastinal silhouette is normal size and configuration . pulmonary vasculature within normal limits . the lungs are well-aerated . there is no pneumothorax pleural effusion or focal consolidation .
+ CXR269_IM-1161->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3552_IM-1741->GT:  size within normal limits stable mediastinal and hilar contours . no focal alveolar consolidation no definite pleural effusion seen . no typical findings of pulmonary edema .
+ CXR3552_IM-1741->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1854_IM-0555->GT:  cardiomediastinal silhouette is normal in size and contour . no focal consolidation pneumothorax or large pleural effusion . negative for acute displaced rib fracture .
+ CXR1854_IM-0555->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3745_IM-1872->GT:  silhouette and pulmonary vasculature are within normal limits . lungs are clear . no pneumothorax or pleural effusion . no acute osseous findings .
+ CXR3745_IM-1872->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1467_IM-0302->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardiomediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR1467_IM-0302->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+TEST-BATCH (output):
+ CXR1270_IM-0181->GT:  images . heart size and pulmonary vascular engorgement appear within limits of normal . mediastinal contour is unremarkable . no focal consolidation pleural effusion or pneumothorax identified . no convincing acute bony findings .
+ CXR1270_IM-0181->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3098_IM-1450->GT:  size and mediastinal contours appear within normal limits . pulmonary vascularity is within normal limits . no focal consolidation suspicious pulmonary opacity pneumothorax or definite pleural effusion . visualized osseous structures appear intact .
+ CXR3098_IM-1450->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1603_IM-0391->GT:  size normal . lungs are clear . xxxx are normal . no pneumonia effusions edema pneumothorax adenopathy nodules or masses .
+ CXR1603_IM-0391->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1008_IM-0009->GT:  size and mediastinal contours are normal in appearance . no <unk> airspace opacities . no <unk> evidence of pleural effusion or pneumothorax . visualized osseous structures appear intact .
+ CXR1008_IM-0009->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2916_IM-1318->GT:  size within normal limits . no focal alveolar consolidation no definite pleural effusion seen . no typical findings of pulmonary edema . no pneumothorax .
+ CXR2916_IM-1318->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR1632_IM-0413->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR1632_IM-0413->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR3265_IM-1551->GT:  heart size and mediastinal contours appear within normal limits . no focal airspace consolidation pleural effusion or pneumothorax . no acute bony abnormalities .
+ CXR3265_IM-1551->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2851_IM-1260-0001->GT:  cardiomediastinal silhouette and pulmonary vasculature are within normal limits in size . the lungs are clear of focal airspace disease pneumothorax or pleural effusion . there are no acute bony findings .
+ CXR2851_IM-1260-0001->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR242_IM-0963->GT:  are clear bilaterally with no focal infiltrate pleural effusion or pneumothoraces . cardiomediastinal silhouette is within normal limits . xxxx and soft tissues are unremarkable .
+ CXR242_IM-0963->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3427_IM-1657->GT:  cardiac silhouette and mediastinum size are within normal limits . there is no pulmonary edema . there is no focal consolidation . there are no xxxx of a large pleural effusion . there is no evidence of pneumothorax .
+ CXR3427_IM-1657->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR3220_IM-1522->GT:  are clear . there is no pneumothorax or pleural effusion . the heart and mediastinum are within normal limits . bony structures are intact .
+ CXR3220_IM-1522->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2005_IM-0656->GT:  size normal . lungs are clear . xxxx are normal . no pneumonia effusions edema pneumothorax adenopathy nodules or masses .
+ CXR2005_IM-0656->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR1410_IM-0260->GT:  heart size is normal . the mediastinal contour is within normal limits . the lungs are free of any focal infiltrates . there are no nodules or masses . no visible pneumothorax . no visible pleural fluid . the xxxx are grossly normal . there is no visible free intraperitoneal air under the diaphragm .
+ CXR1410_IM-0260->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR879_IM-2393->GT:  and mediastinal contours are within normal limits . the lungs are clear . bony structures are intact .
+ CXR879_IM-2393->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3020_IM-1395->GT:  size and mediastinal contours are normal in appearance . no <unk> airspace opacities . no <unk> evidence of pleural effusion or pneumothorax . visualized osseous structures appear intact .
+ CXR3020_IM-1395->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR632_IM-2213->GT:  and mediastinal silhouette are unremarkable . lungs are clear . no focal consolidation pneumothorax or pleural effusion identified . xxxx and soft tissue are unremarkable .
+ CXR632_IM-2213->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+TEST-BATCH (output):
+ CXR2937_IM-1339->GT:  heart size and mediastinal contours appear within normal limits . no focal airspace consolidation pleural effusion or pneumothorax . no acute bony abnormalities .
+ CXR2937_IM-1339->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR328_IM-1560->GT:  heart size and pulmonary vascularity appear within normal limits . the lungs are free of focal airspace disease . no pleural effusion or pneumothorax is seen .
+ CXR328_IM-1560->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3817_IM-1925->GT:  are clear bilaterally with no focal infiltrate pleural effusion or pneumothoraces . cardiomediastinal silhouette is within normal limits . xxxx and soft tissues are unremarkable .
+ CXR3817_IM-1925->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3059_IM-1425->GT:  are clear bilaterally . there is no focal consolidation pleural effusion or pneumothoraces . cardiomediastinal silhouette is within normal limits . xxxx are unremarkable .
+ CXR3059_IM-1425->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR2389_IM-0944->GT:  images . heart size and pulmonary vascular engorgement appear within limits of normal . mediastinal contour is unremarkable . no focal consolidation pleural effusion or pneumothorax identified . no convincing acute bony findings .
+ CXR2389_IM-0944->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR869_IM-2389->GT:  heart is normal size . the mediastinum is unremarkable . there is no pleural effusion pneumothorax or focal airspace disease . the xxxx are unremarkable .
+ CXR869_IM-2389->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR751_IM-2305->GT:  size within normal limits . no focal alveolar consolidation no definite pleural effusion seen . no typical findings of pulmonary edema . no pneumothorax .
+ CXR751_IM-2305->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR1209_IM-0142->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR1209_IM-0142->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1588_IM-0382->GT:  size normal . lungs are clear . xxxx are normal . no pneumonia effusions edema pneumothorax adenopathy nodules or masses .
+ CXR1588_IM-0382->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR487_IM-2110->GT:  silhouettes are within normal limits . lungs are clear without focal consolidation pneumothorax or pleural effusion . bony thorax is unremarkable .
+ CXR487_IM-2110->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1831_IM-0538->GT:  size within normal limits . no focal alveolar consolidation no definite pleural effusion seen . no typical findings of pulmonary edema . no pneumothorax .
+ CXR1831_IM-0538->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR717_IM-2279->GT:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear .
+ CXR717_IM-2279->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR1434_IM-0279->GT:  lungs are clear and expanded . heart and mediastinum normal .
+ CXR1434_IM-0279->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR931_IM-2429->GT:  lungs and pleural spaces show no acute abnormality . heart size and pulmonary vascularity within normal limits .
+ CXR931_IM-2429->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR735_IM-2294->GT:  cardiomediastinal silhouette is within normal limits for size and contour . the lungs are normally inflated without evidence of focal airspace disease pleural effusion or pneumothorax . no acute osseus abnormality .
+ CXR735_IM-2294->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR588_IM-2183->GT:  heart is normal in size and contour . there is no mediastinal widening . the lungs are clear bilaterally . no large pleural effusion or pneumothorax . the xxxx are intact .
+ CXR588_IM-2183->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+TEST-BATCH (output):
+ CXR1509_IM-0331->GT:  are clear bilaterallythere is no focal consolidation pleural effusion or pneumothoraces . cardiomediastinal silhouette is within normal limits . xxxx are unremarkable .
+ CXR1509_IM-0331->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2953_IM-1351->GT:  lungs are clear . there is no pleural effusion or pneumothorax . the heart and mediastinum are normal . the skeletal structures are normal .
+ CXR2953_IM-1351->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3446_IM-1669->GT:  and mediastinal contours are within normal limits . the lungs are clear . bony structures are intact .
+ CXR3446_IM-1669->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3495_IM-1700->GT:  cardiomediastinal silhouette is within normal limits for size and contour . the lungs are normally inflated without evidence of focal airspace disease pleural effusion or pneumothorax . osseous structures are within normal limits for patient age .
+ CXR3495_IM-1700->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR795_IM-2331->GT:  size normal . lungs are clear . xxxx are normal . no pneumonia effusions edema pneumothorax adenopathy nodules or masses .
+ CXR795_IM-2331->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3867_IM-1960->GT:  cardiomediastinal silhouette and pulmonary vasculature are within normal limits in size . the lungs are clear of focal airspace disease pneumothorax or pleural effusion . there are no acute bony findings .
+ CXR3867_IM-1960->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3720_IM-1859->GT:  cardiomediastinal silhouette and pulmonary vasculature are within normal limits in size . the lungs are clear of focal airspace disease pneumothorax or pleural effusion . there are no acute bony findings .
+ CXR3720_IM-1859->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1931_IM-0602->GT:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear .
+ CXR1931_IM-0602->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3126_IM-1470->GT:  cardiomediastinal silhouette is within normal limits for appearance . no focal areas of pulmonary consolidation . no pneumothorax . no pleural effusion . the thoracic spine appears intact . no acute displaced rib fractures .
+ CXR3126_IM-1470->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR3105_IM-1456->GT:  and mediastinum within normal limits . negative for focal pulmonary consolidation pleural effusion or pneumothorax .
+ CXR3105_IM-1456->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2796_IM-1228->GT:  and mediastinal contours are within normal limits . the lungs are clear . bony structures are intact .
+ CXR2796_IM-1228->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1323_IM-0209->GT:  heart size and mediastinal silhouette are within normal limits for contour . the lungs are clear . no pneumothorax or pleural effusions . the xxxx are intact .
+ CXR1323_IM-0209->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1309_IM-0201-1001->GT:  cardiomediastinal silhouette and pulmonary vasculature are within normal limits in size . the lungs are clear of focal airspace disease pneumothorax or pleural effusion . there are no acute bony findings .
+ CXR1309_IM-0201-1001->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2423_IM-0965->GT:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear .
+ CXR2423_IM-0965->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR3194_IM-1505->GT:  heart size and mediastinal silhouette are within normal limits for contour . the lungs are clear . no pneumothorax or pleural effusions . the xxxx are intact .
+ CXR3194_IM-1505->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2136_IM-0758->GT:  contours are normal . lungs are clear . there is no pneumothorax or large pleural effusion .
+ CXR2136_IM-0758->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+TEST-BATCH (output):
+ CXR3778_IM-1894->GT:  and mediastinal contours are within normal limits . the lungs are clear . bony structures are intact .
+ CXR3778_IM-1894->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1726_IM-0479->GT:  lungs are clear and expanded . heart and mediastinum normal .
+ CXR1726_IM-0479->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2889_IM-1291->GT:  cardiomediastinal silhouette is within normal limits for size and contour . the lungs are normally inflated without evidence of focal airspace disease pleural effusion or pneumothorax . osseous structures are within normal limits for patient age .
+ CXR2889_IM-1291->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2786_IM-1221->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR2786_IM-1221->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR497_IM-2114->GT:  size normal . lungs are clear . xxxx are normal . no pneumonia effusions edema pneumothorax adenopathy nodules or masses .
+ CXR497_IM-2114->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR162_IM-0401->GT:  size normal . lungs are clear . xxxx are normal . no pneumonia effusions edema pneumothorax adenopathy nodules or masses .
+ CXR162_IM-0401->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . <sep>
+ CXR3763_IM-1883->GT:  lungs are clear and expanded . heart and mediastinum normal .
+ CXR3763_IM-1883->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2020_IM-0668->GT:  focal lung consolidation . heart size and pulmonary vascularity are within normal limits . no pneumothorax or pleural effusion . osseous structures are grossly intact .
+ CXR2020_IM-0668->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2623_IM-1111->GT:  are clear bilaterally with no focal infiltrate pleural effusion or pneumothoraces . cardiomediastinal silhouette is within normal limits . no acute bony or soft tissue abnormality .
+ CXR2623_IM-1111->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR1190_IM-0128->GT:  lungs are clear and expanded . heart and mediastinum normal .
+ CXR1190_IM-0128->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1646_IM-0423->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR1646_IM-0423->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1627_IM-0408->GT:  lungs and pleural spaces show no acute abnormality . heart size and pulmonary vascularity within normal limits . .
+ CXR1627_IM-0408->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2592_IM-1084->GT:  lungs are clear . there is no pleural effusion or pneumothorax . the heart and mediastinum are normal . the skeletal structures are normal .
+ CXR2592_IM-1084->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR364_IM-1804->GT:  cardiomediastinal silhouette and pulmonary vasculature are within normal limits in size . the lungs are clear of focal airspace disease pneumothorax or pleural effusion . there are no acute bony findings .
+ CXR364_IM-1804->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3890_IM-1973->GT:  are clear bilaterally with no focal infiltrate pleural effusion or pneumothoraces . cardiomediastinal silhouette is within normal limits . xxxx and soft tissues are unremarkable .
+ CXR3890_IM-1973->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1956_IM-0623->GT:  cardiomediastinal contours are within normal limits . pulmonary vasculature is unremarkable . there is no focal airspace opacity . no pleural effusion or pneumothorax is seen . no acute bony abnormality is identified .
+ CXR1956_IM-0623->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+TEST-BATCH (output):
+ CXR1219_IM-0146->GT:  size and mediastinal contours are normal in appearance . no <unk> airspace opacities . no <unk> evidence of pleural effusion or pneumothorax . visualized osseous structures appear intact .
+ CXR1219_IM-0146->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR932_IM-2430->GT:  <unk> consolidation atelectasis or infiltrate . no pleural fluid collection or pneumothorax . cardiomediastinal silhouette is within normal limits . xxxx xxxx is intact .
+ CXR932_IM-2430->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1454_IM-0293->GT:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear .
+ CXR1454_IM-0293->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1582_IM-0378->GT:  lungs are clear and expanded . heart and mediastinum normal .
+ CXR1582_IM-0378->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2413_IM-0959->GT:  size and pulmonary vascularity within normal limits . no focal infiltrate pneumothorax or pleural effusion identified .
+ CXR2413_IM-0959->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR141_IM-0260->GT:  size mediastinal contour and pulmonary vascularity are within normal limits . no focal consolidation suspicious pulmonary opacity pleural effusion or pneumothorax . the visualized osseous structures appear intact .
+ CXR141_IM-0260->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2910_IM-1314->GT:  heart size is normal . the mediastinal contour is within normal limits . the lungs are free of any focal infiltrates . there are no nodules or masses . no visible pneumothorax . no visible pleural fluid . the xxxx are grossly normal . there is no visible free intraperitoneal air under the diaphragm .
+ CXR2910_IM-1314->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3549_IM-1739-1001->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR3549_IM-1739-1001->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3603_IM-1779->GT:  and mediastinal contours are within normal limits . the lungs are clear . bony structures are intact .
+ CXR3603_IM-1779->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1093_IM-0064->GT:  heart size and pulmonary vascularity appear within normal limits . the lungs are free of focal airspace disease . no pleural effusion or pneumothorax is seen .
+ CXR1093_IM-0064->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR2862_IM-1270->GT:  cardiomediastinal silhouette is within normal limits for size and contour . the lungs are normally inflated without evidence of focal airspace disease pleural effusion or pneumothorax . osseous structures are within normal limits for patient age .
+ CXR2862_IM-1270->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR12_IM-0133->GT:  are clear bilaterally . cardiac and mediastinal silhouettes are normal . pulmonary vasculature is normal . no pneumothorax or pleural effusion . no acute bony abnormality .
+ CXR12_IM-0133->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1535_IM-0346->GT:  size and mediastinal contours appear within normal limits . pulmonary vascularity is within normal limits . no focal consolidation suspicious pulmonary opacity pneumothorax or definite pleural effusion . visualized osseous structures appear intact .
+ CXR1535_IM-0346->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3063_IM-1428->GT:  are clear bilaterally . cardiac and mediastinal silhouettes are normal . pulmonary vasculature is normal . no pneumothorax or pleural effusion . no acute bony abnormality .
+ CXR3063_IM-1428->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR771_IM-2316->GT:  size and pulmonary vascularity within normal limits . no focal infiltrate pneumothorax or pleural effusion identified .
+ CXR771_IM-2316->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3845_IM-1945->GT:  cardiomediastinal silhouette and pulmonary vasculature are within normal limits in size . the lungs are clear of focal airspace disease pneumothorax or pleural effusion . there are no acute bony findings .
+ CXR3845_IM-1945->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+TEST-BATCH (output):
+ CXR3403_IM-1647->GT:  cardiomediastinal silhouette is normal in size and contour . no focal consolidation pneumothorax or large pleural effusion . negative for acute displaced rib fracture .
+ CXR3403_IM-1647->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1188_IM-0127->GT:  lungs are clear and expanded . heart and mediastinum normal .
+ CXR1188_IM-0127->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3329_IM-1594->GT:  heart is normal in size and contour . there is no mediastinal widening . the lungs are clear bilaterally . no large pleural effusion or pneumothorax . the xxxx are intact .
+ CXR3329_IM-1594->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3587_IM-1765->GT:  lungs are clear . the cardiomediastinal silhouette is within normal limits . no pneumothorax or pleural effusion .
+ CXR3587_IM-1765->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1344_IM-0223->GT:  contours are normal . lungs are clear . there is no pneumothorax or large pleural effusion .
+ CXR1344_IM-0223->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3962_IM-2027->GT:  size normal . lungs are clear . xxxx are normal . no pneumonia effusions edema pneumothorax adenopathy nodules or masses .
+ CXR3962_IM-2027->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1932_IM-0603->GT:  size and mediastinal contour are normal . pulmonary vascularity is normal . lungs are clear . no pleural effusions or pneumothoraces .
+ CXR1932_IM-0603->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1510_IM-0331->GT:  are clear bilaterally . cardiac and mediastinal silhouettes are normal . pulmonary vasculature is normal . no pneumothorax or pleural effusion . no acute bony abnormality .
+ CXR1510_IM-0331->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR86_IM-2380->GT:  size is within normal limits . no focal airspace consolidations . no pneumothorax or pleural effusion .
+ CXR86_IM-2380->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR770_IM-2316->GT:  size mediastinal contour and pulmonary vascularity are within normal limits . no focal consolidation suspicious pulmonary opacity pleural effusion or pneumothorax . the visualized osseous structures appear intact .
+ CXR770_IM-2316->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR1796_IM-0517->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR1796_IM-0517->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1480_IM-0311->GT:  heart is normal in size and contour . there is no mediastinal widening . the lungs are clear bilaterally . no large pleural effusion or pneumothorax . the xxxx are intact .
+ CXR1480_IM-0311->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3203_IM-1513->GT:  and mediastinal contours are within normal limits . the lungs are clear . bony structures are intact .
+ CXR3203_IM-1513->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR565_IM-2166->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR565_IM-2166->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR474_IM-2101->GT:  lungs are clear . there is no pleural effusion or pneumothorax . the heart and mediastinum are normal . the skeletal structures are normal .
+ CXR474_IM-2101->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2861_IM-1269->GT:  heart size and pulmonary vascularity appear within normal limits . the lungs are free of focal airspace disease . no pleural effusion or pneumothorax is seen .
+ CXR2861_IM-1269->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+TEST-BATCH (output):
+ CXR3106_IM-1456->GT:  and mediastinal contours are within normal limits . the lungs are clear . bony structures are intact .
+ CXR3106_IM-1456->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2061_IM-0698->GT:  heart and mediastinum are unremarkable . the lungs are clear without infiltrate . there is no effusion or pneumothorax .
+ CXR2061_IM-0698->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1191_IM-0128->GT:  size and pulmonary vascular engorgement appear within limits of normal . mediastinal contour is unremarkable . no focal consolidation pleural effusion or pneumothorax identified . no acute bony changes .
+ CXR1191_IM-0128->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3844_IM-1945->GT:  are clear . no pleural effusions or pneumothoraces . heart size is upper limits of normal .
+ CXR3844_IM-1945->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1205_IM-0138->GT:  heart size . clear lungs without pneumothorax or pleural effusion .
+ CXR1205_IM-0138->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2948_IM-1348->GT:  heart size and pulmonary vascularity appear within normal limits . the lungs are free of focal airspace disease . no pleural effusion or pneumothorax is seen .
+ CXR2948_IM-1348->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR785_IM-2325->GT:  cardiomediastinal silhouette and pulmonary vasculature are within normal limits in size . the lungs are clear of focal airspace disease pneumothorax or pleural effusion . there are no acute bony findings .
+ CXR785_IM-2325->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1544_IM-0354->GT:  heart . clear lungs . no pneumothorax . no pleural effusion .
+ CXR1544_IM-0354->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR435_IM-2075->GT:  are clear . there is no pneumothorax or pleural effusion . the heart and mediastinum are within normal limits . bony structures are intact .
+ CXR435_IM-2075->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3136_IM-1475->GT:  size mediastinal contour and pulmonary vascularity are within normal limits . no focal consolidation suspicious pulmonary opacity pleural effusion or pneumothorax . the visualized osseous structures appear intact .
+ CXR3136_IM-1475->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR3283_IM-1564->GT:  are clear . no pleural effusions or pneumothoraces . heart and mediastinum of normal size and contour .
+ CXR3283_IM-1564->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1608_IM-0394->GT:  cardiac silhouette upper mediastinum and pulmonary vasculature are within normal limits . there is no acute air space infiltrate pleural effusion or pneumothorax . no pulmonary nodules are identified .
+ CXR1608_IM-0394->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2965_IM-1358->GT:  size within normal limits . no focal airspace disease . no pleural effusion . no pneumothorax .
+ CXR2965_IM-1358->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2876_IM-1282->GT:  are no focal areas of consolidation . no suspicious pulmonary opacities . heart size within normal limits . no pleural effusions . there is no evidence of pneumothorax .
+ CXR2876_IM-1282->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3922_IM-1996-0001->GT:  cardiomediastinal silhouette . no focal pulmonary opacity pleural effusion or pneumothorax . no acute bony abnormality .
+ CXR3922_IM-1996-0001->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR913_IM-2417->GT:  size normal . stable cardiomediastinal silhouette . no pneumothorax pleural effusion or focal airspace disease . bony structures are in xxxx alignment without fracture .
+ CXR913_IM-2417->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+TEST-BATCH (output):
+ CXR2146_IM-0766->GT:  and mediastinal contours are within normal limits . the lungs are clear . bony structures are intact .
+ CXR2146_IM-0766->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2918_IM-1320->GT:  silhouette is normal . pulmonary vasculature and xxxx are normal . no consolidation pneumothorax or large pleural effusion . osseous structures and soft tissues are normal .
+ CXR2918_IM-1320->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1470_IM-0303->GT:  contours are normal . lungs are clear . there is no pneumothorax or large pleural effusion .
+ CXR1470_IM-0303->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR3775_IM-1893->GT:  focal lung consolidation . heart size and pulmonary vascularity are within normal limits . no pneumothorax or pleural effusion . osseous structures are grossly intact .
+ CXR3775_IM-1893->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1460_IM-0298->GT:  and mediastinal contours are within normal limits . the lungs are clear . bony structures are intact .
+ CXR1460_IM-0298->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR1319_IM-0205->GT:  heart size and pulmonary vascularity appear within normal limits . the lungs are free of focal airspace disease . no pleural effusion or pneumothorax is seen .
+ CXR1319_IM-0205->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR988_IM-2474->GT:  are clear . no focal infiltrate . no pleural effusion or pneumothorax . normal cardiomediastinal silhouette .
+ CXR988_IM-2474->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2445_IM-0981->GT:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear .
+ CXR2445_IM-0981->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3472_IM-1688->GT:  cardiomediastinal silhouette and vasculature are within normal limits for size and contour . the lungs are normally inflated and clear . osseous structures are within normal limits for patient age .
+ CXR3472_IM-1688->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR850_IM-2373-0001->GT:  appearance of the cardiomediastinal silhouette . there is no pneumothorax pleural effusion or focal airspace consolidation .
+ CXR850_IM-2373-0001->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2145_IM-0766->GT:  cardiomediastinal silhouette is normal . the lungs are clear . there is no pneumothorax or <unk> . visualized bony structures are normal .
+ CXR2145_IM-0766->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1377_IM-0242->GT:  heart size is normal . the mediastinal contour is within normal limits . the lungs are free of any focal infiltrates . there are no nodules or masses . no visible pneumothorax . no visible pleural fluid . the xxxx are grossly normal . there is no visible free intraperitoneal air under the diaphragm .
+ CXR1377_IM-0242->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3221_IM-1522->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR3221_IM-1522->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR980_IM-2468->GT:  size and mediastinal contours appear within normal limits . pulmonary vascularity is within normal limits . no focal consolidation suspicious pulmonary opacity pneumothorax or definite pleural effusion . visualized osseous structures appear intact .
+ CXR980_IM-2468->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2159_IM-0776->GT:  lungs and pleural spaces show no acute abnormality . heart size and pulmonary vascularity within normal limits . .
+ CXR2159_IM-0776->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2401_IM-0950->GT:  silhouette is within normal limits of size and appearance . the pulmonary vascularity is unremarkable . lungs are expanded and clear airspace disease . negative for pneumothorax pleural effusion or <unk> . limited bone evaluation reveals no acute abnormality .
+ CXR2401_IM-0950->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+TEST-BATCH (output):
+ CXR427_IM-2070->GT:  cardiomediastinal silhouette is within normal limits for size and contour . the lungs are normally inflated without evidence of focal airspace disease pleural effusion or pneumothorax . osseous structures are within normal limits for patient age .
+ CXR427_IM-2070->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR891_IM-2403->GT:  heart size and pulmonary vascularity appear within normal limits . the lungs are free of focal airspace disease . no pleural effusion or pneumothorax is seen .
+ CXR891_IM-2403->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR136_IM-0233->GT:  size normal . lungs are clear . xxxx are normal . no pneumonia effusions edema pneumothorax adenopathy nodules or masses .
+ CXR136_IM-0233->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR2768_IM-1212->GT:  xxxx and lateral chest examination was obtained . the heart silhouette is normal in size and contour . aortic xxxx appear unremarkable . lungs demonstrate no acute findings . there is no effusion or pneumothorax .
+ CXR2768_IM-1212->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1950_IM-0618->GT:  and mediastinal contours are unremarkable . pulmonary vascularity is within normal limits . no focal air space opacities pleural effusion or pneumothorax . xxxx are grossly unremarkable .
+ CXR1950_IM-0618->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2866_IM-1273->GT:  size normal . lungs are clear . xxxx are normal . no pneumonia effusions edema pneumothorax adenopathy nodules or masses .
+ CXR2866_IM-1273->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR708_IM-2271->GT:  pleural effusion pneumothorax or focal airspace opacities . cardiomediastinal silhouette is within normal limits . the trachea is midline . no free subdiaphragmatic air . the <unk> osseous structures are grossly intact .
+ CXR708_IM-2271->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1899_IM-0582->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR1899_IM-0582->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR1530_IM-0344->GT:  contours are normal . lungs are clear . there is no pneumothorax or large pleural effusion .
+ CXR1530_IM-0344->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR2797_IM-1229->GT:  trachea is midline . the cardiomediastinal silhouette is normal . the lungs are clear without evidence of acute infiltrate or effusion . there is no pneumothorax . visualized bony structures reveal no acute abnormalities .
+ CXR2797_IM-1229->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1799_IM-0519->GT:  size within normal limits . no focal airspace disease . no pneumothorax or pleural effusion .
+ CXR1799_IM-0519->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3885_IM-1971->GT:  heart pulmonary xxxx and mediastinum are within normal limits . there is no pleural effusion or pneumothorax . there is no focal air space opacity to suggest a pneumonia .
+ CXR3885_IM-1971->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2129_IM-0753->GT:  heart is normal in size and contour . the lungs are clear without evidence of infiltrate . there is no pneumothorax or effusion .
+ CXR2129_IM-0753->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR584_IM-2181->GT:  are no focal areas of consolidation . no suspicious pulmonary opacities . heart size within normal limits . no pleural effusions . no evidence of pneumothorax . osseous structures intact .
+ CXR584_IM-2181->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR3025_IM-1400->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality . no acute displaced rib fractures .
+ CXR3025_IM-1400->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1046_IM-0036->GT:  and mediastinum within normal limits . negative for focal pulmonary consolidation pleural effusion or pneumothorax .
+ CXR1046_IM-0036->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+TEST-BATCH (output):
+ CXR757_IM-2308->GT:  size is normal . the lungs are clear . there are no focal air space consolidations . no pleural effusions or pneumothoraces . the hilar and mediastinal contours are unchanged . normal pulmonary vascularity . stable postsurgical changes of the lower cervical spine .
+ CXR757_IM-2308->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2559_IM-1063->GT:  heart size and pulmonary vascularity appear within normal limits . the lungs are free of focal airspace disease . no pleural effusion or pneumothorax is seen .
+ CXR2559_IM-1063->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1622_IM-0404->GT:  cardiomediastinal silhouette is within normal limits for size and contour . the lungs are normally inflated without evidence of focal airspace disease pleural effusion or pneumothorax . no acute osseus abnormality .
+ CXR1622_IM-0404->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR2545_IM-1054->GT:  trachea is midline . the cardiomediastinal silhouette is normal . lung xxxx are clear without evidence of effusion infiltrate or pneumothorax . visualized bony structures are intact . visualized soft tissues appear normal .
+ CXR2545_IM-1054->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR356_IM-1744->GT:  cardiomediastinal silhouette is within normal limits for size and contour . the lungs are normally inflated without evidence of focal airspace disease pleural effusion or pneumothorax . osseous structures are within normal limits for patient age .
+ CXR356_IM-1744->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR30_IM-1385->GT:  are clear without focal consolidation effusion or pneumothorax . normal heart size . negative for <unk> . bony thorax and soft tissue grossly unremarkable .
+ CXR30_IM-1385->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2799_IM-1231->GT:  are clear bilaterally . cardiac and mediastinal silhouettes are normal . pulmonary vasculature is normal . no pneumothorax or pleural effusion . no acute bony abnormality .
+ CXR2799_IM-1231->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3271_IM-1552->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR3271_IM-1552->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR1253_IM-0171-0001->GT:  size and pulmonary vascularity appear within normal limits . the lungs are free of focal airspace disease . no pleural effusion or pneumothorax is seen .
+ CXR1253_IM-0171-0001->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3359_IM-1612->GT:  size normal . no focal airspace disease . no pneumothorax or effusions .
+ CXR3359_IM-1612->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1953_IM-0621->GT:  lungs are clear without evidence of focal airspace disease . there is no evidence of pneumothorax or large pleural effusion . the cardiac and mediastinal contours are within normal limits . the xxxx are unremarkable .
+ CXR1953_IM-0621->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2081_IM-0713->GT:  lungs are <unk> and clear . no pleural effusion or pneumothorax is seen . the cardiomediastinal contour is normal . no acute osseous lesions are identified .
+ CXR2081_IM-0713->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR663_IM-2239->GT:  are clear bilaterally with no focal infiltrate pleural effusion or pneumothoraces . cardiomediastinal silhouette is within normal limits . no acute bony or soft tissue abnormality .
+ CXR663_IM-2239->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR657_IM-2233-0001->GT:  is at the upper limits of normal size . lungs are clear without focal infiltrates . no pneumothorax or pleural effusion . normal pulmonary vascularity .
+ CXR657_IM-2233-0001->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR23_IM-0879->GT:  heart size and pulmonary vascularity appear within normal limits . the lungs are free of focal airspace disease . no pleural effusion or pneumothorax is seen .
+ CXR23_IM-0879->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1560_IM-0366->GT:  heart . clear lungs . no pneumothorax . no pleural effusion .
+ CXR1560_IM-0366->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+TEST-BATCH (output):
+ CXR3860_IM-1954->GT:  heart size and mediastinal silhouette are within normal limits for contour . the lungs are clear . no pneumothorax or pleural effusions . the xxxx are intact .
+ CXR3860_IM-1954->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3958_IM-2022->GT:  lungs are clear and expanded . heart and mediastinum normal .
+ CXR3958_IM-2022->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR3889_IM-1973->GT:  size is normal . no pneumothorax pleural effusion or focal airspace disease . bony structures appear intact .
+ CXR3889_IM-1973->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1539_IM-0349->GT:  lungs are clear . the cardiomediastinal silhouette is within normal limits . no pleural effusion is identified .
+ CXR1539_IM-0349->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR307_IM-1432->GT:  cardiomediastinal silhouette and pulmonary vasculature are within normal limits . there is no pneumothorax or pleural effusion . there are no focal areas of consolidation .
+ CXR307_IM-1432->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3489_IM-1696->GT:  cardiomediastinal silhouette is normal in size and contour . no focal consolidation pneumothorax or large pleural effusion . normal xxxx .
+ CXR3489_IM-1696->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2000_IM-0654->GT:  heart is normal in size and contour . the lungs are clear without evidence of infiltrate . there is no pneumothorax or effusion .
+ CXR2000_IM-0654->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1431_IM-0278->GT:  cardiomediastinal silhouette and pulmonary vasculature are within normal limits in size . the lungs are clear of focal airspace disease pneumothorax or pleural effusion . there are no acute bony findings .
+ CXR1431_IM-0278->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2086_IM-0717->GT:  cardiomediastinal silhouette is within normal limits . lungs are clear without focal consolidation . no visualized pneumothorax or large pleural effusion . no acute bone abnormality .
+ CXR2086_IM-0717->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR2552_IM-1058->GT:  are clear without focal consolidation effusion or pneumothorax . normal heart size . bony thorax and soft tissues grossly unremarkable .
+ CXR2552_IM-1058->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR764_IM-2311->GT:  cardiomediastinal silhouette is normal in size and contour . no focal consolidation pneumothorax or large pleural effusion . negative for acute abnormality .
+ CXR764_IM-2311->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3039_IM-1412->GT:  heart size . clear lungs . no pneumothorax or large pleural effusion .
+ CXR3039_IM-1412->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2558_IM-1062->GT:  is no focal consolidation . there is no pneumothorax or large pleural effusion . the cardiomediastinal contours are grossly unremarkable . the heart size is within normal limits .
+ CXR2558_IM-1062->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1701_IM-0462->GT:  and mediastinal contours are within normal limits . the lungs are clear . bony structures are intact .
+ CXR1701_IM-0462->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR238_IM-0939->GT:  cardiomediastinal silhouette . no focal pulmonary opacity pleural effusion or pneumothorax . no acute bony abnormality .
+ CXR238_IM-0939->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2247_IM-0844->GT:  cardiomediastinal silhouette is normal in size and appearance . no pleural effusion or pneumothorax . lungs are clear .
+ CXR2247_IM-0844->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+TEST-BATCH (output):
+ CXR768_IM-2313->GT:  heart size and mediastinal contours . no focal air space opacities . no pleural effusion . visualized osseous structures are unremarkable .
+ CXR768_IM-2313->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1109_IM-0076->GT:  size and mediastinal contours appear within normal limits . pulmonary vascularity is within normal limits . no focal consolidation suspicious pulmonary opacity pneumothorax or definite pleural effusion . visualized osseous structures appear intact .
+ CXR1109_IM-0076->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR968_IM-2458->GT:  size within normal limits . no focal alveolar consolidation no definite pleural effusion seen . no typical findings of pulmonary edema . no pneumothorax .
+ CXR968_IM-2458->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1960_IM-0627->GT:  and mediastinal contours are within normal limits . the lungs are clear . bony structures are intact .
+ CXR1960_IM-0627->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR937_IM-2433->GT:  cardiac size . normal pulmonary vasculature . no airspace disease . negative for pneumothorax . negative for acute osseous deformity . the thoracic spine has a normal appearance .
+ CXR937_IM-2433->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR912_IM-2417->GT:  focal consolidation . no visualized pneumothorax . no large pleural effusions . heart size is normal . the cardiomediastinal silhouette is grossly unremarkable .
+ CXR912_IM-2417->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR502_IM-2120->GT:  . the trachea is midline . negative for pneumothorax pleural effusion or focal airspace consolidation . the heart size is normal . abdomen . no <unk> . there is a normal bowel xxxx pattern . air and <unk> visible throughout the <unk> large <unk> including the <unk> . no <unk> dilated small bowel loops . no evidence for <unk> or small bowel <unk> . no <unk> calcifications xxxx over the abdomen or pelvis . xxxx xxxx are without fracture or destructive lesion <unk> there are mild degenerative changes throughout the lumbar spine . small hiatal hernia is not
+ CXR502_IM-2120->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1623_IM-0405->GT:  cardiomediastinal contours . no pneumothorax pleural effusions or focal lung consolidation .
+ CXR1623_IM-0405->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1598_IM-0389->GT:  size mediastinal contour and pulmonary vascularity are within normal limits . no focal consolidation pleural effusion or pneumothorax is identified . no acute osseous abnormality identified .
+ CXR1598_IM-0389->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR2290_IM-0874->GT:  are no focal areas of consolidation . no suspicious pulmonary opacities . heart size within normal limits . no pleural effusions . no evidence of pneumothorax . osseous structures are intact .
+ CXR2290_IM-0874->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3505_IM-1707->GT:  size is normal and the lungs are clear .
+ CXR3505_IM-1707->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3083_IM-1442->GT:  lungs and pleural spaces show no acute abnormality . heart size and pulmonary vascularity within normal limits . .
+ CXR3083_IM-1442->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3582_IM-1761->GT:  size is normal . the lungs are clear . there is no pneumothorax or large pleural effusion .
+ CXR3582_IM-1761->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1788_IM-0513->GT:  trachea is midline . negative for pneumothorax pleural effusion or focal airspace consolidation . the heart size is normal .
+ CXR1788_IM-0513->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR3981_IM-2039->GT:  lungs are clear . there is no pleural effusion or pneumothorax . the heart and mediastinum are normal . the skeletal structures are normal .
+ CXR3981_IM-2039->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3321_IM-1588->GT:  xxxx and lateral chest examination was obtained . the heart silhouette is normal in size and contour . aortic xxxx appear unremarkable . lungs demonstrate no acute findings . there is no effusion or pneumothorax .
+ CXR3321_IM-1588->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+TEST-BATCH (output):
+ CXR2660_IM-1142->GT:  size normal . lungs are clear . xxxx are normal . no pneumonia effusions edema pneumothorax adenopathy nodules or masses .
+ CXR2660_IM-1142->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1517_IM-0335->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR1517_IM-0335->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR367_IM-1826->GT:  lungs are clear . no focal airspace consolidation . no pleural effusion or pneumothorax . heart size is within normal limits .
+ CXR367_IM-1826->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1911_IM-0593->GT:  and mediastinal contours are unremarkable . pulmonary vascularity is within normal limits . no focal air space opacities pleural effusion or pneumothorax . xxxx are grossly unremarkable .
+ CXR1911_IM-0593->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3576_IM-1757->GT:  cardiomediastinal silhouette is within normal limits . the lungs are clear without areas of focal consolidation . no pneumothorax or large pleural effusion . no acute bone abnormality .
+ CXR3576_IM-1757->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2008_IM-0658->GT:  focal consolidation . no visualized pneumothorax . no pleural effusions . heart size normal . the cardiomediastinal silhouette is unremarkable .
+ CXR2008_IM-0658->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR1280_IM-0187->GT:  cardiac silhouette and mediastinum size are within normal limits . there is no pulmonary edema . there is no focal consolidation . there are no xxxx of pleural effusion . there is no evidence of pneumothorax .
+ CXR1280_IM-0187->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1466_IM-0302->GT:  heart is normal size . the mediastinum is unremarkable . there is no pleural effusion pneumothorax or focal airspace disease . the xxxx are unremarkable .
+ CXR1466_IM-0302->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR3722_IM-1859->GT:  lungs are clear . heart size is normal . no pneumothorax .
+ CXR3722_IM-1859->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1574_IM-0374->GT:  are clear bilaterally . cardiac and mediastinal silhouettes are normal . pulmonary vasculature is normal . no pneumothorax or pleural effusion . no acute bony abnormality .
+ CXR1574_IM-0374->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1175_IM-0119->GT:  lungs are clear and expanded . heart and mediastinum normal .
+ CXR1175_IM-0119->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR1601_IM-0390->GT:  lungs and pleural spaces show no acute abnormality . heart size and pulmonary vascularity within normal limits .
+ CXR1601_IM-0390->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR2210_IM-0817->GT:  cardiomediastinal silhouette is within normal limits for appearance . no focal areas of pulmonary consolidation . no pneumothorax . no pleural effusion . the thoracic spine appears intact .
+ CXR2210_IM-0817->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR539_IM-2145->GT:  images . heart size and pulmonary vascular engorgement appear within limits of normal . mediastinal contour is unremarkable . no focal consolidation pleural effusion or pneumothorax identified . no convincing acute bony findings .
+ CXR539_IM-2145->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1964_IM-0629->GT:  size and mediastinal contours appear within normal limits . pulmonary vascularity is within normal limits . no focal consolidation suspicious pulmonary opacity pneumothorax or definite pleural effusion . visualized osseous structures appear intact .
+ CXR1964_IM-0629->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR301_IM-1389->GT:  cardiomediastinal contours . clear lungs bilaterally . no pneumothorax or large effusion .
+ CXR301_IM-1389->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+TEST-BATCH (output):
+ CXR3814_IM-1923->GT:  focal consolidation pneumothorax or definite pleural effusion . heart size within normal limits no mediastinal widening <unk> in appearance of vascular injury . no acute osseous injury xxxx demonstrated .
+ CXR3814_IM-1923->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3224_IM-1524->GT:  cardiomediastinal silhouette is normal in size and contour . no focal consolidation pneumothorax or large pleural effusion . negative for acute bone abnormality .
+ CXR3224_IM-1524->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR1697_IM-0458->GT:  are clear bilaterally . cardiac and mediastinal silhouettes are normal . pulmonary vasculature is normal . no pneumothorax or pleural effusion . no acute bony abnormality .
+ CXR1697_IM-0458->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3594_IM-1772->GT:  cardiomediastinal silhouette is normal . no focal airspace consolidation . no pneumothorax or pleural effusion .
+ CXR3594_IM-1772->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2579_IM-1078->GT:  lungs are clear without focal consolidation effusion or pneumothorax . normal heart size . bony thorax unremarkable .
+ CXR2579_IM-1078->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3836_IM-1939->GT:  heart size is normal . the mediastinal contour is within normal limits . the lungs are free of any focal infiltrates . there are no nodules or masses . no visible pneumothorax . no visible pleural fluid . the xxxx are grossly normal . there is no visible free intraperitoneal air under the diaphragm .
+ CXR3836_IM-1939->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR419_IM-2062->GT:  and mediastinal contours are within normal limits . the lungs are clear . bony structures are intact .
+ CXR419_IM-2062->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3196_IM-1507->GT:  lungs are clear and expanded . heart and mediastinum normal .
+ CXR3196_IM-1507->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR3976_IM-2035->GT:  size and mediastinal contour are normal . pulmonary vascularity is normal . lungs are clear . no pleural effusions or pneumothoraces .
+ CXR3976_IM-2035->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR3639_IM-1804->GT:  cardiac and mediastinal silhouette is normal there is no evidence of <unk> or pneumothorax . clear lungs there are no large pleural effusions no evidence of displaced fractures .
+ CXR3639_IM-1804->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR190_IM-0583->GT:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no obvious <unk> or destructive lesion . no displaced rib fracture is <unk> .
+ CXR190_IM-0583->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1920_IM-0598->GT:  silhouette is normal in size and contour . pulmonary vasculature is normal in caliber . lungs are clear of focal airspace disease pneumothorax or pleural effusion . there are no acute bony findings .
+ CXR1920_IM-0598->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3112_IM-1461->GT:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear .
+ CXR3112_IM-1461->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR510_IM-2126->GT:  are clear bilaterally with no focal infiltrate pleural effusion or pneumothoraces . cardiomediastinal silhouette is within normal limits . xxxx and soft tissues are unremarkable .
+ CXR510_IM-2126->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1515_IM-0333->GT:  cardiomediastinal silhouette is within normal limits for appearance . no focal areas of pulmonary consolidation . no pneumothorax . no pleural effusion . the thoracic spine appears intact .
+ CXR1515_IM-0333->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1851_IM-0553->GT:  size is normal . no focal airspace consolidations . no pneumothorax or effusion . no acute osseous findings .
+ CXR1851_IM-0553->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+TEST-BATCH (output):
+ CXR264_IM-1125->GT:  xxxx mediastinum xxxx bony structures and lung xxxx are unremarkable . no significant interval change compared to prior study no xxxx infiltrates noted .
+ CXR264_IM-1125->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2491_IM-1017->GT:  cardiomediastinal silhouette and pulmonary vasculature are within normal limits . there is no pneumothorax or pleural effusion . there are no focal areas of consolidation .
+ CXR2491_IM-1017->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR94_IM-2436->GT:  size mediastinal contour and pulmonary vascularity are similar to comparison exam and within normal limits . no focal consolidation suspicious pulmonary opacity pleural effusion or pneumothorax . the visualized osseous structures appear intact .
+ CXR94_IM-2436->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2148_IM-0767->GT:  and mediastinal contours are within normal limits . the lungs are clear . bony structures are intact .
+ CXR2148_IM-0767->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR164_IM-0419->GT:  cardiopulmonary silhouette is normal . the heart size is normal . the lungs are clear with no pulmonary effusions or pneumothorax .
+ CXR164_IM-0419->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1409_IM-0260->GT:  focal consolidation . no visualized pneumothorax . heart size and cardiomediastinal silhouette are grossly unremarkable . no large pleural effusions .
+ CXR1409_IM-0260->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2078_IM-0710->GT:  lungs and pleural spaces show no acute abnormality . heart size and pulmonary vascularity within normal limits .
+ CXR2078_IM-0710->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1236_IM-0158->GT:  cardiomediastinal silhouette and pulmonary vasculature are within normal limits in size . the lungs are clear of focal airspace disease pneumothorax or pleural effusion . there are no acute bony findings .
+ CXR1236_IM-0158->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR721_IM-2282->GT:  are clear . no pleural effusions or pneumothoraces . heart and mediastinum of normal size and contour .
+ CXR721_IM-2282->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR368_IM-1832->GT:  silhouette and pulmonary vasculature are within normal limits . lungs are clear . no pneumothorax or pleural effusion . no acute osseous findings .
+ CXR368_IM-1832->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3522_IM-1720->GT:  are clear . there is no pneumothorax or pleural effusion . the heart and mediastinum are within normal limits . bony structures are intact .
+ CXR3522_IM-1720->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1523_IM-0339->GT:  size cardiomediastinal silhouette and pulmonary vasculature are within normal limits . there are no infiltrates effusions or pneumothorax .
+ CXR1523_IM-0339->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR261_IM-1100->GT:  focal areas of consolidation . heart size within normal limits . no pleural effusions . no evidence of pneumothorax . osseous structures appear intact .
+ CXR261_IM-1100->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR421_IM-2064->GT:  are clear without focal consolidation effusion or pneumothorax . normal heart size . bony thorax and soft tissues grossly unremarkable . negative for <unk> .
+ CXR421_IM-2064->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1853_IM-0555->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardiomediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR1853_IM-0555->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2787_IM-1222->GT:  pneumothorax pleural effusion or airspace consolidation . heart size is upper limits of normal . pulmonary vasculature appear within normal limits . xxxx xxxx are intact .
+ CXR2787_IM-1222->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+TEST-BATCH (output):
+ CXR450_IM-2082->GT:  focal consolidation . no pneumothorax . no pleural effusions . heart size normal . cardio mediastinal silhouette is unremarkable .
+ CXR450_IM-2082->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3173_IM-1495->GT:  are clear . heart size normal . no pneumothorax .
+ CXR3173_IM-1495->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR1681_IM-0448->GT:  lungs are clear and expanded . heart and mediastinum normal .
+ CXR1681_IM-0448->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3180_IM-1500->GT:  heart is normal in size and contour . the lungs are clear without evidence of infiltrate . there is no pneumothorax or effusion .
+ CXR3180_IM-1500->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1011_IM-0013->GT:  heart is top normal in size . the mediastinum is unremarkable . the lungs are clear .
+ CXR1011_IM-0013->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR2529_IM-1044->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR2529_IM-1044->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR543_IM-2148->GT:  lungs are clear . the cardiomediastinal silhouette is within normal limits . no pleural effusion is identified .
+ CXR543_IM-2148->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR106_IM-0042->GT:  size and mediastinal contour are normal . pulmonary vascularity is normal . lungs are clear . no pleural effusions or pneumothoraces .
+ CXR106_IM-0042->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3139_IM-1476->GT:  focal areas of consolidation . no pleural effusions . no evidence of pneumothorax . heart size within normal limits . osseous structures intact .
+ CXR3139_IM-1476->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR3384_IM-1631->GT:  lungs are clear and expanded . heart and mediastinum normal .
+ CXR3384_IM-1631->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR622_IM-2204->GT:  lungs are clear and expanded . heart and mediastinum normal .
+ CXR622_IM-2204->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR429_IM-2070->GT:  cardiomediastinal silhouette and pulmonary vasculature are within normal limits in size . the lungs are clear of focal airspace disease pneumothorax or pleural effusion . there is no definite evidence of acute fracture .
+ CXR429_IM-2070->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR3422_IM-1656->GT:  size normal . lungs are clear . xxxx are normal . no pneumonia effusions edema pneumothorax adenopathy nodules or masses .
+ CXR3422_IM-1656->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR1429_IM-0275->GT:  contours are normal . heart size is within normal limits . lungs are clear . there is no pneumothorax or large pleural effusion .
+ CXR1429_IM-0275->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+ CXR107_IM-0049->GT:  lungs are clear bilaterally . specifically no evidence of focal consolidation pneumothorax or pleural effusion . cardio mediastinal silhouette is unremarkable . visualized osseous structures of the thorax are without acute abnormality .
+ CXR107_IM-0049->GEN:  heart is normal in size . the mediastinum is within normal limits . the lungs are clear without focal airspace disease pleural effusion or pneumothorax . <sep>
+ CXR950_IM-2446->GT:  cardiomediastinal silhouette and pulmonary vasculature are within normal limits . there is no pneumothorax or pleural effusion . there are no focal areas of consolidation .
+ CXR950_IM-2446->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+TEST-BATCH (output):
+ CXR2612_IM-1103->GT:  cardiomediastinal silhouette and pulmonary vasculature are within normal limits in size . the lungs are clear of focal airspace disease pneumothorax or pleural effusion . there are no acute bony findings .
+ CXR2612_IM-1103->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR226_IM-0851->GT:  cardiac contours are normal . the lungs are clear . thoracic spondylosis .
+ CXR226_IM-0851->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . there is no acute bony abnormality . <sep>
+ CXR2312_IM-0887->GT:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear .
+ CXR2312_IM-0887->GEN:  heart is normal in size . the mediastinum is unremarkable . the lungs are clear . there is no pneumothorax or pleural effusion . <sep>
+	epoch          : 2
+	train_loss     : 2.8202662211198075
+	val_BLEU_1     : 0.49999999999981937
+	val_BLEU_2     : 0.34700430115293673
+	val_BLEU_3     : 0.26196503277228633
+	val_BLEU_4     : 0.20306568222390062
+	val_METEOR     : 0.23791936850415757
+	val_ROUGE_L    : 0.44200930606620426
+	test_BLEU_1    : 0.48034482758615166
+	test_BLEU_2    : 0.3223857743465957
+	test_BLEU_3    : 0.24210050313548587
+	test_BLEU_4    : 0.1874618908660759
+	test_METEOR    : 0.22943499638763296
+	test_ROUGE_L   : 0.41774407097682076
+epoch: 2 ended: time.struct_time(tm_year=2022, tm_mon=9, tm_mday=28, tm_hour=13, tm_min=38, tm_sec=0, tm_wday=2, tm_yday=271, tm_isdst=1)
+('epoch: 2', ' executed for 00:06:32.30')
+Saving checkpoint: ../r2gen_results/iu_xray/current_checkpoint.pth ...
+Saving current best: model_best.pth ...
+Best results (w.r.t BLEU_4) in validation set:
+	val_BLEU_4     : 0.20306568222390062
+	epoch          : 2
+	train_loss     : 2.8202662211198075
+	val_BLEU_1     : 0.49999999999981937
+	val_BLEU_2     : 0.34700430115293673
+	val_BLEU_3     : 0.26196503277228633
+	val_METEOR     : 0.23791936850415757
+	val_ROUGE_L    : 0.44200930606620426
+	test_BLEU_1    : 0.48034482758615166
+	test_BLEU_2    : 0.3223857743465957
+	test_BLEU_3    : 0.24210050313548587
+	test_BLEU_4    : 0.1874618908660759
+	test_METEOR    : 0.22943499638763296
+	test_ROUGE_L   : 0.41774407097682076
+Best results (w.r.t BLEU_4) in test set:
+	test_BLEU_4    : 0.1874618908660759
+	epoch          : 2
+	train_loss     : 2.8202662211198075
+	val_BLEU_1     : 0.49999999999981937
+	val_BLEU_2     : 0.34700430115293673
+	val_BLEU_3     : 0.26196503277228633
+	val_BLEU_4     : 0.20306568222390062
+	val_METEOR     : 0.23791936850415757
+	val_ROUGE_L    : 0.44200930606620426
+	test_BLEU_1    : 0.48034482758615166
+	test_BLEU_2    : 0.3223857743465957
+	test_BLEU_3    : 0.24210050313548587
+	test_METEOR    : 0.22943499638763296
+	test_ROUGE_L   : 0.41774407097682076
+R2Gen ended: time.struct_time(tm_year=2022, tm_mon=9, tm_mday=28, tm_hour=13, tm_min=38, tm_sec=15, tm_wday=2, tm_yday=271, tm_isdst=1)
+('R2Gen', ' executed for 00:06:51.98')
+/media/compute/homes/tmandal/projects/R2Gen/modules/trainer.py:124: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  record_table = record_table.append(self.best_recorder['val'], ignore_index=True)
+/media/compute/homes/tmandal/projects/R2Gen/modules/trainer.py:125: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  record_table = record_table.append(self.best_recorder['test'], ignore_index=True)
+
+real	6m58.376s
+user	84m32.930s
+sys	4m23.212s
