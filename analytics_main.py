@@ -27,8 +27,6 @@ def main():
     ######################################
 
     data_processor = DataProcessor(args)
-    print("Is association file valid: ", data_processor.validate_association())
-    tokenizer = Tokenizer(args, data_processor)
     # test negation detection
     negation_detection = NegationDetection(args)
     for split, split_sample in data_processor.iu_mesh_impression_split.items():
@@ -42,6 +40,8 @@ def main():
         for sample in split_sample[:args.train_sample]:
             negation_detection.get_doc_object(sample)
     #################################################################################
+    # print("Is association file valid: ", data_processor.validate_association())
+    # tokenizer = Tokenizer(args, data_processor)
     # exp_stats = ExperimentsStatistics(tokenizer, args.exp)
     # print("exp: ", args.exp, " ", exp_stats.stats)
     #
