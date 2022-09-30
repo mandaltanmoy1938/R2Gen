@@ -14,14 +14,24 @@ class NegationDetection(object):
         self.nlp_model_bc5cdr = spacy.load("en_ner_bc5cdr_md")
         self.clinical_termset = termset("en_clinical")
 
-        negations = ["clear", "intact", "normal", "stable", "unremarkable", "without", "satisfactory", "no",
-                     "well aerated", "unchanged", "not", "free of", "within limits"]
+        self.preceding_negations = ["no", "free of", "normal", "clear", "unchanged", "not", "unremarkable", "stable",
+                                    "maintained",
+                                    "minimal", "mild"] # confusion
+        self.following_negations = ["clear", "intact", "normal", "stable", "unremarkable", "without", "satisfactory",
+                                    "no", "well aerated", "unchanged", "not", "within limits", "normally aerated",
+                                    "well-aerated", "maintained",
+                                    "moderate", "minimal", "mild", "postsurgical changes"] # confusion
+
+        self.negations = ["clear", "intact", "normal", "stable", "unremarkable", "without", "satisfactory", "no",
+                          "well aerated", "unchanged", "not", "free of", "within limits", "normally aerated",
+                          "well-aerated",
+                          "maintained",
+                          "moderate", "minimal", "mild", "postsurgical changes"]  # confusion
         # self.entities = ["DISEASE", "TEST", "TREATMENT", "NEG_ENTITY"]
         self.clinical_termset.add_patterns({
             # "pseudo_negations": ["within normal limits", "stable"],
-            "preceding_negations": ["no", "free of", "normal", "clear", "unchanged", "not"],
-            "following_negations": ["clear", "intact", "normal", "stable", "unremarkable", "without", "satisfactory",
-                                    "no", "well aerated", "unchanged", "not", "within limits"],
+            "preceding_negations": self.negations,
+            "following_negations": self.negations,
         })
         self.nlp_model_sci.add_pipe("negex", config={"neg_termset": self.clinical_termset.get_patterns()})
         self.nlp_model_bc5cdr.add_pipe("negex", config={"neg_termset": self.clinical_termset.get_patterns()})
