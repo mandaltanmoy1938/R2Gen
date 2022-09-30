@@ -30,16 +30,18 @@ def main():
     # test negation detection
     negation_detection = NegationDetection(args)
     for split, split_sample in data_processor.iu_mesh_impression_split.items():
-        # if split == 'train' and args.train_sample > 0:
-            # split_sample = random.sample(list(split_sample.values()), args.train_sample)
-        # if split == 'val' and args.val_sample > 0:
-            # split_sample = random.sample(list(split_sample.values()), args.val_sample)
-        # if split == 'test' and args.test_sample > 0:
-            # split_sample = random.sample(list(split_sample.values()), args.test_sample)
-        # split_sample = list(split_sample.values())
-        for r_id, sample in split_sample.items():
-            negation_detection.get_doc_object(sample)
-        negation_detection.to_csv()
+        break_count = 0
+        if split == "train" and args.train_sample > 0:
+            break_count = args.train_sample
+        if split == "val" and args.val_sample > 0:
+            break_count = args.val_sample
+        if split == "test" and args.test_sample > 0:
+            break_count = args.test_sample
+        for index, sample in enumerate(split_sample.items()):
+            if index == break_count:
+                break
+            negation_detection.populate_ann_neg(sample[1])
+    negation_detection.to_csv()
     #################################################################################
     print("Is association file valid: ", data_processor.validate_association())
     tokenizer = Tokenizer(args, data_processor)
