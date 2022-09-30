@@ -14,11 +14,14 @@ class NegationDetection(object):
         self.nlp_model_bc5cdr = spacy.load("en_ner_bc5cdr_md")
         self.clinical_termset = termset("en_clinical")
 
+        negations = ["clear", "intact", "normal", "stable", "unremarkable", "without", "satisfactory", "no",
+                     "well aerated", "unchanged", "not", "free of", "within limits"]
         # self.entities = ["DISEASE", "TEST", "TREATMENT", "NEG_ENTITY"]
         self.clinical_termset.add_patterns({
             # "pseudo_negations": ["within normal limits", "stable"],
-            "preceding_negations": ["no", "free of", "normal"],
-            "following_negations": ["clear", "intact", "normal", "stable"],
+            "preceding_negations": ["no", "free of", "normal", "clear", "unchanged", "not"],
+            "following_negations": ["clear", "intact", "normal", "stable", "unremarkable", "without", "satisfactory",
+                                    "no", "well aerated", "unchanged", "not", "within limits"],
         })
         self.nlp_model_sci.add_pipe("negex", config={"neg_termset": self.clinical_termset.get_patterns()})
         self.nlp_model_bc5cdr.add_pipe("negex", config={"neg_termset": self.clinical_termset.get_patterns()})
@@ -38,8 +41,6 @@ class NegationDetection(object):
                 if split == "test" and self.args.test_sample > 0:
                     if break_count == self.args.test_sample:
                         break
-                if self.args.val_test_partial_data == 1 and sample["iu_mesh"] != "normal":
-                    continue
 
                 for sentence in self.tokenizer.clean_report_iu_xray(sample["report"]).split('.'):
                     # lem_sentence = self.lemmatize(sentence, self.nlp0)
@@ -73,7 +74,7 @@ class NegationDetection(object):
         return negex_ann
 
     def to_csv(self):
-        pd.DataFrame(self.negex_ann).to_csv('data/iu_xray//kaggle/negex_ann.csv', encoding='utf-8', index=False)
+        pd.DataFrame(self.negex_ann).to_csv('data/iu_xray/kaggle/negex_ann.csv', encoding='utf-8', index=False)
 
     def lemmatize(self, report, nlp_model):
         doc = nlp_model(report)
