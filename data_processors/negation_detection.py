@@ -1,8 +1,8 @@
 # exp setup
-import spacy
 import pandas as pd
-from negspacy.termsets import termset
+import spacy
 from negspacy.negation import Negex
+from negspacy.termsets import termset
 
 
 class NegationDetection(object):
@@ -16,9 +16,9 @@ class NegationDetection(object):
 
         # self.entities = ["DISEASE", "TEST", "TREATMENT", "NEG_ENTITY"]
         self.clinical_termset.add_patterns({
-            "pseudo_negations": ["normal", "stable"],
-            "preceding_negations": ["normal", "stable", "no", "free of"],
-            "following_negations": ["normal", "stable"],
+            # "pseudo_negations": ["within normal limits", "stable"],
+            "preceding_negations": ["no", "free of", "normal"],
+            "following_negations": ["clear", "intact", "normal", "stable"],
         })
         self.nlp_model_sci.add_pipe("negex", config={"neg_termset": self.clinical_termset.get_patterns()})
         self.nlp_model_bc5cdr.add_pipe("negex", config={"neg_termset": self.clinical_termset.get_patterns()})
@@ -28,16 +28,20 @@ class NegationDetection(object):
         negex_ann = list()
         for split, split_sample in self.tokenizer.data_processor.iu_mesh_impression_split.items():
             break_count = 0
-            if split == "train" and self.args.train_sample > 0:
-                break_count = self.args.train_sample
-            if split == "val" and self.args.val_sample > 0:
-                break_count = self.args.val_sample
-            if split == "test" and self.args.test_sample > 0:
-                break_count = self.args.test_sample
-            for index, sample in enumerate(split_sample.items()):
-                if 0 < break_count == index:
-                    break
-                for sentence in self.tokenizer.clean_report_iu_xray(sample[1]["report"]).split('.'):
+            for r_id, sample in split_sample.items():
+                if split == "train" and self.args.train_sample > 0:
+                    if break_count == self.args.train_sample:
+                        break
+                if split == "val" and self.args.val_sample > 0:
+                    if break_count == self.args.val_sample:
+                        break
+                if split == "test" and self.args.test_sample > 0:
+                    if break_count == self.args.test_sample:
+                        break
+                if self.args.val_test_partial_data == 1 and sample["iu_mesh"] != "normal":
+                    continue
+
+                for sentence in self.tokenizer.clean_report_iu_xray(sample["report"]).split('.'):
                     # lem_sentence = self.lemmatize(sentence, self.nlp0)
                     sentence = sentence.strip()
                     if not sentence:
@@ -49,22 +53,23 @@ class NegationDetection(object):
                     if len(model_entity_dict["bc5cdr"]) > 0:
                         for bc5cdr_en_dict in model_entity_dict["bc5cdr"]:
                             negex_ann.append(
-                                {"id": sample[1]["id"], "sentence": sentence, "model": "bc5cdr",
+                                {"id": sample["id"], "sentence": sentence, "model": "bc5cdr",
                                  "text": bc5cdr_en_dict["text"], "negex": bc5cdr_en_dict["negex"],
                                  "label": bc5cdr_en_dict["label"]})
 
                             for sci_en_dict in model_entity_dict["sci"]:
                                 if bc5cdr_en_dict["text"] not in sci_en_dict["text"]:
                                     negex_ann.append(
-                                        {"id": sample[1]["id"], "sentence": sentence, "model": "sci",
+                                        {"id": sample["id"], "sentence": sentence, "model": "sci",
                                          "text": sci_en_dict["text"], "negex": sci_en_dict["negex"],
                                          "label": sci_en_dict["label"]})
                     else:
                         for sci_en_dict in model_entity_dict["sci"]:
                             negex_ann.append(
-                                {"id": sample[1]["id"], "sentence": sentence, "model": "sci",
+                                {"id": sample["id"], "sentence": sentence, "model": "sci",
                                  "text": sci_en_dict["text"], "negex": sci_en_dict["negex"],
                                  "label": sci_en_dict["label"]})
+                break_count += 1
         return negex_ann
 
     def to_csv(self):
