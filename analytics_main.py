@@ -32,9 +32,7 @@ def main():
     data_processor = DataProcessor(args)
     # test negation detection
     tokenizer = Tokenizer(args, data_processor)
-    negation_detection = NegationDetection(args, tokenizer)
-    json.dump(negation_detection.clinical_termset.get_patterns(),
-              open("data/iu_xray/kaggle/negation_patterns.json", 'w'))
+    NegationDetection(args, tokenizer)
     ################################################################################
     print("Is association file valid: ", data_processor.validate_association())
     exp_stats = ExperimentsStatistics(tokenizer, args.exp)
