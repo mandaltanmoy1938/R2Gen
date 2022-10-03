@@ -28,12 +28,8 @@ class DataProcessor(object):
             self.iu_mesh_impression = json.loads(open(self.iu_mesh_impression_path, 'r').read())
         else:
             self.iu_mesh_impression_split, self.iu_mesh_impression = self.associate_iu_r2gen_kaggle_by_id()
-
-        if self.is_new_random_split == 1:
-            if os.path.exists(self.iu_mesh_impression_path_new_split) and os.path.exists(self.kaggle_ann_path):
-                self.iu_mesh_impression_split = json.loads(open(self.iu_mesh_impression_path_new_split, 'r').read())
-            else:
-                self.iu_mesh_impression_split = self.split_dataset()
+            self.dum_to_json(self.iu_mesh_impression, self.iu_mesh_impression_path)
+            self.dum_to_json(self.iu_mesh_impression_split, self.iu_mesh_impression_path_split)
         self.analyze = Analyze(args, self.iu_mesh_impression_split)
 
     def associate_iu_r2gen_kaggle_by_id(self):
@@ -99,13 +95,12 @@ class DataProcessor(object):
                                                             "kaggle_report": ""}
                         unmatched[r2gen_id] = {"r2gen_uid": uid, "r2gen_report": r2gen_value,
                                                "kaggle_report": ""}
-        if not os.path.exists(self.iu_mesh_impression_path_split):
-            os.mknod(self.iu_mesh_impression_path_split)
-        json.dump(matched_split, open(self.iu_mesh_impression_path_split, 'w'))
-        if not os.path.exists(self.iu_mesh_impression_path):
-            os.mknod(self.iu_mesh_impression_path)
-        json.dump(matched, open(self.iu_mesh_impression_path, 'w'))
         return matched_split, matched
+
+    def dum_to_json(self, data, path):
+        if not os.path.exists(path):
+            os.mknod(path)
+        json.dump(data, open(path, 'w'))
 
     def get_reports_by_exp(self, exp, split, r2gen_id, report):
         if 3 < exp < 7:
@@ -116,36 +111,9 @@ class DataProcessor(object):
                 mesh_attr = " <sep>" + self.iu_mesh_impression_split[split][r2gen_id]['mesh_attr']
                 return report + mesh_attr
             elif exp == 3 or exp == 6:
-                mesh_attr = " <sep>" + self.iu_mesh_impression_split[split][r2gen_id]['ag_mesh_attr']
+                mesh_attr = " <sep>" + self.iu_mesh_impression_split[split][r2gen_id]['auto_generated_ontology_report']
                 return report + mesh_attr
         return report
-
-    def split_dataset(self):
-        dataset_keys = list(self.iu_mesh_impression.keys())
-        train_size = int(0.7 * len(dataset_keys))  # 2068
-        test_size = int(0.2 * len(dataset_keys))  # 591
-        val_size = len(dataset_keys) - train_size - test_size  # 296
-
-        train_set, val_set, test_set = random_split(dataset_keys, [train_size, val_size, test_size])
-        iu_mesh_impression_split = dict(train={}, val={}, test={})
-        iu_mesh_impression_split["train"] = {k: self.iu_mesh_impression[k] for k in train_set}
-        iu_mesh_impression_split["val"] = {k: self.iu_mesh_impression[k] for k in val_set}
-        iu_mesh_impression_split["test"] = {k: self.iu_mesh_impression[k] for k in test_set}
-
-        if not os.path.exists(self.iu_mesh_impression_path_new_split):
-            os.mknod(self.iu_mesh_impression_path_new_split)
-        json.dump(iu_mesh_impression_split, open(self.iu_mesh_impression_path_new_split, 'w'))
-
-        iu_mesh_impression_ann = dict(train=[], val=[], test=[])
-        iu_mesh_impression_ann["train"] = list(iu_mesh_impression_split["train"].values())
-        iu_mesh_impression_ann["val"] = list(iu_mesh_impression_split["val"].values())
-        iu_mesh_impression_ann["test"] = list(iu_mesh_impression_split["test"].values())
-
-        if not os.path.exists(self.kaggle_ann_path):
-            os.mknod(self.kaggle_ann_path)
-        json.dump(iu_mesh_impression_ann, open(self.kaggle_ann_path, 'w'))
-
-        return iu_mesh_impression_split
 
     def validate_association(self):
         self.analyze.get_number_of_normal()
