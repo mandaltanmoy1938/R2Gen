@@ -29,5 +29,5 @@ time python main.py \
 --is_print 1 \
 --remove_annotation 1 \
 --val_test_partial_data 0 \
---max_seq_length 60 \
---exp 1
+--max_seq_length 100 \
+--exp 3
