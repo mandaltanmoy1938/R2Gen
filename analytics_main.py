@@ -33,7 +33,6 @@ def main():
     # test negation detection
     tokenizer = Tokenizer(args, data_processor)
     negation_detection = NegationDetection(args, tokenizer)
-    negation_detection.to_csv()
     json.dump(negation_detection.clinical_termset.get_patterns(),
               open("data/iu_xray/kaggle/negation_patterns.json", 'w'))
     ################################################################################
