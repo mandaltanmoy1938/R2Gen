@@ -6,6 +6,7 @@ import torch
 from _global import timer
 from _global.argument_parser import ArgumentParser
 from data_processors.data_processor import DataProcessor
+from data_processors.negation_detection import NegationDetection
 from models.r2gen import R2GenModel
 from modules.dataloaders import R2DataLoader
 from modules.loss import compute_loss
@@ -38,6 +39,9 @@ def main():
 
     # create tokenizer
     tokenizer = Tokenizer(args, data_processor)
+
+    # clinical negation detection
+    NegationDetection(args, tokenizer)
     ####################################
 
     # create data loader
