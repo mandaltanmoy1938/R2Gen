@@ -10,32 +10,39 @@ class NegationDetection(object):
         self.negex = Negex
         self.args = args
         self.tokenizer = tokenizer
-        self.nlp_model_sci = spacy.load("en_core_sci_sm")
-        self.nlp_model_bc5cdr = spacy.load("en_ner_bc5cdr_md")
-        self.clinical_termset = termset("en_clinical")
+        if "auto_generated_ontology_report" not in \
+                list(self.tokenizer.data_processor.iu_mesh_impression_split["train"].values())[0] and \
+                "auto_generated_ontology_impression" not in \
+                list(self.tokenizer.data_processor.iu_mesh_impression_split["train"].values())[0]:
+            self.nlp_model_sci = spacy.load("en_core_sci_sm")
+            self.nlp_model_bc5cdr = spacy.load("en_ner_bc5cdr_md")
+            self.clinical_termset = termset("en_clinical")
 
-        self.preceding_negations = ["no", "free of", "normal", "clear", "unchanged", "not", "unremarkable", "stable",
-                                    "maintained",
-                                    "minimal", "mild"] # confusion
-        self.following_negations = ["clear", "intact", "normal", "stable", "unremarkable", "without", "satisfactory",
-                                    "no", "well aerated", "unchanged", "not", "within limits", "normally aerated",
-                                    "well-aerated", "maintained",
-                                    "moderate", "minimal", "mild", "postsurgical changes"] # confusion
+            self.preceding_negations = ["no", "free of", "normal", "clear", "unchanged", "not", "unremarkable",
+                                        "stable",
+                                        "maintained",
+                                        "minimal", "mild"]  # confusion
+            self.following_negations = ["clear", "intact", "normal", "stable", "unremarkable", "without",
+                                        "satisfactory",
+                                        "no", "well aerated", "unchanged", "not", "within limits", "normally aerated",
+                                        "well-aerated", "maintained",
+                                        "moderate", "minimal", "mild", "postsurgical changes"]  # confusion
 
-        self.negations = ["clear", "intact", "normal", "stable", "unremarkable", "without", "satisfactory", "no",
-                          "well aerated", "unchanged", "not", "free of", "within limits", "normally aerated",
-                          "well-aerated",
-                          "maintained",
-                          "moderate", "minimal", "mild", "postsurgical changes"]  # confusion
-        # self.entities = ["DISEASE", "TEST", "TREATMENT", "NEG_ENTITY"]
-        self.clinical_termset.add_patterns({
-            # "pseudo_negations": ["within normal limits", "stable"],
-            "preceding_negations": self.negations,
-            "following_negations": self.negations,
-        })
-        self.nlp_model_sci.add_pipe("negex", config={"neg_termset": self.clinical_termset.get_patterns()})
-        self.nlp_model_bc5cdr.add_pipe("negex", config={"neg_termset": self.clinical_termset.get_patterns()})
-        self.negex_ann = self.populate_ann_neg()
+            self.negations = ["clear", "intact", "normal", "stable", "unremarkable", "without", "satisfactory", "no",
+                              "well aerated", "unchanged", "not", "free of", "within limits", "normally aerated",
+                              "well-aerated",
+                              "maintained",
+                              "moderate", "minimal", "mild", "postsurgical changes"]  # confusion
+            # self.entities = ["DISEASE", "TEST", "TREATMENT", "NEG_ENTITY"]
+            self.clinical_termset.add_patterns({
+                # "pseudo_negations": ["within normal limits", "stable"],
+                "preceding_negations": self.negations,
+                "following_negations": self.negations,
+            })
+            self.nlp_model_sci.add_pipe("negex", config={"neg_termset": self.clinical_termset.get_patterns()})
+            self.nlp_model_bc5cdr.add_pipe("negex", config={"neg_termset": self.clinical_termset.get_patterns()})
+            self.negex_ann = self.populate_ann_neg()
+            self.to_csv()
 
     def populate_ann_neg(self):
         negex_ann = list()
@@ -52,46 +59,54 @@ class NegationDetection(object):
                     if break_count == self.args.test_sample:
                         break
 
-                for sentence in self.tokenizer.clean_report_iu_xray(sample["report"]).split('.'):
-                    # lem_sentence = self.lemmatize(sentence, self.nlp0)
-                    sentence = sentence.strip()
-                    if not sentence:
-                        continue
-                    model_entity_dict = dict(sci=list(dict()), bc5cdr=list(dict()))
-                    model_entity_dict = self.get_negation(self.nlp_model_sci(sentence), "sci", model_entity_dict)
-                    model_entity_dict = self.get_negation(self.nlp_model_bc5cdr(sentence), "bc5cdr", model_entity_dict)
+                for rep_imp in ["report", "impression"]:
+                    autogenerated_ontology = ""
+                    for sentence in self.tokenizer.clean_report_iu_xray(sample[rep_imp]).split('.'):
+                        sentence = sentence.strip()
+                        if not sentence:
+                            continue
+                        model_entity_dict = dict(sci=list(dict()), bc5cdr=list(dict()))
+                        model_entity_dict = self.get_negation(self.nlp_model_sci(sentence), "sci", model_entity_dict)
+                        model_entity_dict = self.get_negation(self.nlp_model_bc5cdr(sentence), "bc5cdr",
+                                                              model_entity_dict)
 
-                    if len(model_entity_dict["bc5cdr"]) > 0:
+                        bc5cdr_text = list()
                         for bc5cdr_en_dict in model_entity_dict["bc5cdr"]:
                             negex_ann.append(
                                 {"id": sample["id"], "sentence": sentence, "model": "bc5cdr",
                                  "text": bc5cdr_en_dict["text"], "negex": bc5cdr_en_dict["negex"],
                                  "label": bc5cdr_en_dict["label"]})
+                            autogenerated_ontology += " <{}:{}{}>". \
+                                format(bc5cdr_en_dict["label"], "!" if bc5cdr_en_dict["negex"] else "",
+                                       bc5cdr_en_dict["text"].replace(" ", "_"))
+                            bc5cdr_text.append(bc5cdr_en_dict["text"])
 
-                            for sci_en_dict in model_entity_dict["sci"]:
-                                if bc5cdr_en_dict["text"] not in sci_en_dict["text"]:
-                                    negex_ann.append(
-                                        {"id": sample["id"], "sentence": sentence, "model": "sci",
-                                         "text": sci_en_dict["text"], "negex": sci_en_dict["negex"],
-                                         "label": sci_en_dict["label"]})
-                    else:
                         for sci_en_dict in model_entity_dict["sci"]:
-                            negex_ann.append(
-                                {"id": sample["id"], "sentence": sentence, "model": "sci",
-                                 "text": sci_en_dict["text"], "negex": sci_en_dict["negex"],
-                                 "label": sci_en_dict["label"]})
-                break_count += 1
+                            if all(text not in sci_en_dict["text"] for text in bc5cdr_text):
+                                negex_ann.append(
+                                    {"id": sample["id"], "sentence": sentence, "model": "sci",
+                                     "text": sci_en_dict["text"], "negex": sci_en_dict["negex"],
+                                     "label": sci_en_dict["label"]})
+                                autogenerated_ontology += " <{}:{}{}>". \
+                                    format(sci_en_dict["label"], "!" if sci_en_dict["negex"] else "",
+                                           sci_en_dict["text"].replace(" ", "_"))
+                    self.tokenizer.data_processor.iu_mesh_impression_split[split][r_id][
+                        "auto_generated_ontology_" + rep_imp] = autogenerated_ontology
+            break_count += 1
+        self.tokenizer.data_processor.dump_to_json(self.tokenizer.data_processor.iu_mesh_impression_split,
+                                                   self.tokenizer.data_processor.iu_mesh_impression_path_split)
         return negex_ann
 
     def to_csv(self):
         pd.DataFrame(self.negex_ann).to_csv('data/iu_xray/kaggle/negex_ann.csv', encoding='utf-8', index=False)
 
-    def lemmatize(self, report, nlp_model):
-        doc = nlp_model(report)
+    def lemmatize(self, text, nlp_model):
+        doc = nlp_model(text)
         lemNote = [wd.lemma_ for wd in doc]
         return " ".join(lemNote)
 
     def get_negation(self, doc, model, ann_dict):
         for entity in doc.ents:
-            ann_dict[model].append({"text": entity.text, "negex": entity._.negex, "label": entity.label_})
+            ann_dict[model].append({"text": self.lemmatize(entity.text, self.nlp_model_sci), "negex": entity._.negex,
+                                    "label": entity.label_})
         return ann_dict

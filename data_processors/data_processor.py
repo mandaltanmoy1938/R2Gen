@@ -3,8 +3,6 @@ import csv
 import json
 import os
 
-from torch.utils.data import random_split
-
 from analytics.analyze import Analyze
 
 
@@ -28,8 +26,8 @@ class DataProcessor(object):
             self.iu_mesh_impression = json.loads(open(self.iu_mesh_impression_path, 'r').read())
         else:
             self.iu_mesh_impression_split, self.iu_mesh_impression = self.associate_iu_r2gen_kaggle_by_id()
-            self.dum_to_json(self.iu_mesh_impression, self.iu_mesh_impression_path)
-            self.dum_to_json(self.iu_mesh_impression_split, self.iu_mesh_impression_path_split)
+            # self.dump_to_json(self.iu_mesh_impression, self.iu_mesh_impression_path)
+            # self.dump_to_json(self.iu_mesh_impression_split, self.iu_mesh_impression_path_split)
         self.analyze = Analyze(args, self.iu_mesh_impression_split)
 
     def associate_iu_r2gen_kaggle_by_id(self):
@@ -97,7 +95,7 @@ class DataProcessor(object):
                                                "kaggle_report": ""}
         return matched_split, matched
 
-    def dum_to_json(self, data, path):
+    def dump_to_json(self, data, path):
         if not os.path.exists(path):
             os.mknod(path)
         json.dump(data, open(path, 'w'))
@@ -110,8 +108,12 @@ class DataProcessor(object):
             if exp == 2 or exp == 5:
                 mesh_attr = " <sep>" + self.iu_mesh_impression_split[split][r2gen_id]['mesh_attr']
                 return report + mesh_attr
-            elif exp == 3 or exp == 6:
+            elif exp == 3:
                 mesh_attr = " <sep>" + self.iu_mesh_impression_split[split][r2gen_id]['auto_generated_ontology_report']
+                return report + mesh_attr
+            elif exp == 6:
+                mesh_attr = " <sep>" + self.iu_mesh_impression_split[split][r2gen_id][
+                    'auto_generated_ontology_impression']
                 return report + mesh_attr
         return report
 
