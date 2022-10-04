@@ -129,11 +129,11 @@ def parse_agrs():
                         )
     # val and test whole dataset; only normal; only abnormal(with no indexing);
     parser.add_argument('--val_test_partial_data', type=int, default=0, choices=[0, 1, 2, 3, 4],
-                        help='0 whole dataset' '296 590'
-                             '1 only normal' '98 307'
-                             '2 only no indexing' '4 25'
-                             '3 only abnormal(without no indexing)' '194 258'
-                             '4 only abnormal(with no indexing)' '198 283'
+                        help='0 whole dataset' 'val:296 test:590'
+                             '1 only normal' 'val:98 test:307'
+                             '2 only no indexing' 'val:4 test:25'
+                             '3 only abnormal(without no indexing)' 'val:194 test:258'
+                             '4 only abnormal(with no indexing)' 'val:198 test:283'
                         )
 
     # Experiment number
