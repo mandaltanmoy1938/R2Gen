@@ -13,7 +13,6 @@ class DataProcessor(object):
         self.args = args
         self.r2gen_ann_path = args.ann_path
         self.kaggle_ann_path = self.r2gen_ann_path.replace("r2gen", "kaggle")
-        self.is_new_random_split = args.is_new_random_split
         self.kaggle_iu_reports_path = args.kaggle_iu_reports_path
         self.iu_mesh_impression_path_split = args.iu_mesh_impression_path.replace(".json", "_split.json")
         self.iu_mesh_impression_path_new_split = args.iu_mesh_impression_path.replace(".json", "_new_split.json")
