@@ -4,10 +4,11 @@ from collections import Counter
 
 
 class Tokenizer(object):
-    def __init__(self, args, data_processor):
+    def __init__(self, args, data_processor=None):
         # exp setup
         self.exp = args.exp
-        self.data_processor = data_processor
+        if data_processor is not None:
+            self.data_processor = data_processor
         self.val_test_partial_data = args.val_test_partial_data
         #############################################################
         self.ann_path = args.ann_path
@@ -18,54 +19,56 @@ class Tokenizer(object):
         else:
             self.clean_report = self.clean_report_mimic_cxr
         self.ann = json.loads(open(self.ann_path, 'r').read())
-        # exp setup
-        # partial dataset for test and val
-        if self.val_test_partial_data == 1:
-            normal_ann = [asample
-                          for ids, sample in self.data_processor.iu_mesh_impression_split['val'].items()
-                          if sample['iu_mesh'] == 'normal'
-                          for asample in self.ann['val'] if asample['id'] == ids]
-            self.ann['val'] = normal_ann
-            normal_ann = [asample
-                          for ids, sample in self.data_processor.iu_mesh_impression_split['test'].items()
-                          if sample['iu_mesh'] == 'normal'
-                          for asample in self.ann['test'] if asample['id'] == ids]
-            self.ann['test'] = normal_ann
-        elif self.val_test_partial_data == 2:
-            normal_ann = [asample
-                          for ids, sample in self.data_processor.iu_mesh_impression_split['val'].items()
-                          if sample['iu_mesh'] == 'No Indexing'
-                          for asample in self.ann['val'] if asample['id'] == ids]
-            self.ann['val'] = normal_ann
-            normal_ann = [asample
-                          for ids, sample in self.data_processor.iu_mesh_impression_split['test'].items()
-                          if sample['iu_mesh'] == 'No Indexing'
-                          for asample in self.ann['test'] if asample['id'] == ids]
-            self.ann['test'] = normal_ann
-        elif self.val_test_partial_data == 3:
-            normal_ann = [asample
-                          for ids, sample in self.data_processor.iu_mesh_impression_split['val'].items()
-                          if sample['iu_mesh'] != 'normal' and sample['iu_mesh'] != 'No Indexing'
-                          for asample in self.ann['val'] if asample['id'] == ids]
-            self.ann['val'] = normal_ann
-            normal_ann = [asample
-                          for ids, sample in self.data_processor.iu_mesh_impression_split['test'].items()
-                          if sample['iu_mesh'] != 'normal' and sample['iu_mesh'] != 'No Indexing'
-                          for asample in self.ann['test'] if asample['id'] == ids]
-            self.ann['test'] = normal_ann
-        elif self.val_test_partial_data == 4:
-            normal_ann = [asample
-                          for ids, sample in self.data_processor.iu_mesh_impression_split['val'].items()
-                          if sample['iu_mesh'] != 'normal'
-                          for asample in self.ann['val'] if asample['id'] == ids]
-            self.ann['val'] = normal_ann
-            normal_ann = [asample
-                          for ids, sample in self.data_processor.iu_mesh_impression_split['test'].items()
-                          if sample['iu_mesh'] != 'normal'
-                          for asample in self.ann['test'] if asample['id'] == ids]
-            self.ann['test'] = normal_ann
-        ###################################################################################################################
-        self.token2idx, self.idx2token = self.create_vocabulary()
+
+        if data_processor is not None:
+            # exp setup
+            # partial dataset for test and val
+            if self.val_test_partial_data == 1:
+                normal_ann = [asample
+                              for ids, sample in self.data_processor.iu_mesh_impression_split['val'].items()
+                              if sample['iu_mesh'] == 'normal'
+                              for asample in self.ann['val'] if asample['id'] == ids]
+                self.ann['val'] = normal_ann
+                normal_ann = [asample
+                              for ids, sample in self.data_processor.iu_mesh_impression_split['test'].items()
+                              if sample['iu_mesh'] == 'normal'
+                              for asample in self.ann['test'] if asample['id'] == ids]
+                self.ann['test'] = normal_ann
+            elif self.val_test_partial_data == 2:
+                normal_ann = [asample
+                              for ids, sample in self.data_processor.iu_mesh_impression_split['val'].items()
+                              if sample['iu_mesh'] == 'No Indexing'
+                              for asample in self.ann['val'] if asample['id'] == ids]
+                self.ann['val'] = normal_ann
+                normal_ann = [asample
+                              for ids, sample in self.data_processor.iu_mesh_impression_split['test'].items()
+                              if sample['iu_mesh'] == 'No Indexing'
+                              for asample in self.ann['test'] if asample['id'] == ids]
+                self.ann['test'] = normal_ann
+            elif self.val_test_partial_data == 3:
+                normal_ann = [asample
+                              for ids, sample in self.data_processor.iu_mesh_impression_split['val'].items()
+                              if sample['iu_mesh'] != 'normal' and sample['iu_mesh'] != 'No Indexing'
+                              for asample in self.ann['val'] if asample['id'] == ids]
+                self.ann['val'] = normal_ann
+                normal_ann = [asample
+                              for ids, sample in self.data_processor.iu_mesh_impression_split['test'].items()
+                              if sample['iu_mesh'] != 'normal' and sample['iu_mesh'] != 'No Indexing'
+                              for asample in self.ann['test'] if asample['id'] == ids]
+                self.ann['test'] = normal_ann
+            elif self.val_test_partial_data == 4:
+                normal_ann = [asample
+                              for ids, sample in self.data_processor.iu_mesh_impression_split['val'].items()
+                              if sample['iu_mesh'] != 'normal'
+                              for asample in self.ann['val'] if asample['id'] == ids]
+                self.ann['val'] = normal_ann
+                normal_ann = [asample
+                              for ids, sample in self.data_processor.iu_mesh_impression_split['test'].items()
+                              if sample['iu_mesh'] != 'normal'
+                              for asample in self.ann['test'] if asample['id'] == ids]
+                self.ann['test'] = normal_ann
+            ###################################################################################################################
+            self.token2idx, self.idx2token = self.create_vocabulary()
 
     def create_vocabulary(self):
         total_tokens = []
