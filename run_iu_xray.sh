@@ -26,7 +26,7 @@ time python main.py \
 --test_sample 0 \
 --create_r2gen_kaggle_association 0 \
 --iu_mesh_impression_path data/iu_xray/kaggle/iu_mesh_impression.json \
--- resume ../r2gen_results/iu_xray/model_best.pth \
+--resume ../r2gen_results/iu_xray/model_best.pth \
 --is_print 1 \
 --remove_annotation 0 \
 --val_test_partial_data 0 \
