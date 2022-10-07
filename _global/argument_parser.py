@@ -49,7 +49,6 @@ def parse_agrs():
     # Trainer settings
     parser.add_argument('--n_gpu', type=int, default=1, help='the number of gpus to be used.')
     parser.add_argument('--epochs', type=int, default=100, help='the number of training epochs.')
-    parser.add_argument('--save_dir', type=str, default='results/iu_xray', help='the patch to save the models.')
     parser.add_argument('--record_dir', type=str, default='records/',
                         help='the patch to save the results of experiments')
     parser.add_argument('--save_period', type=int, default=1, help='the saving period.')
@@ -73,7 +72,6 @@ def parse_agrs():
 
     # Others
     parser.add_argument('--seed', type=int, default=9233, help='.')
-    parser.add_argument('--resume', type=str, help='whether to resume the training from existing checkpoints.')
 
     # exp setup
     # Data input settings
@@ -94,6 +92,11 @@ def parse_agrs():
     parser.add_argument('--iu_mesh_impression_path', type=str,
                         default=('%s/kaggle/iu_mesh_impression.json' % data_iu_xray_path),
                         help='the path to the directory containing the mesh and impression for r2gen dataset.')
+    # save directory path
+    parser.add_argument('--save_dir', type=str, default='../r2gen_results/iu_xray',
+                        help='the patch to save the models.')
+    # resume path
+    parser.add_argument('--resume', type=str, help='whether to resume the training from existing checkpoints.')
 
     # To print and debug
     parser.add_argument('--is_print', type=int, default=0, choices=[0, 1],
