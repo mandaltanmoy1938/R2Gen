@@ -15,7 +15,7 @@ time python main.py \
 --dataset_name iu_xray \
 --threshold 3 \
 --batch_size 16 \
---epochs 2 \
+--epochs 100 \
 --step_size 50 \
 --gamma 0.1 \
 --seed 9223 \
@@ -26,9 +26,8 @@ time python main.py \
 --test_sample 0 \
 --create_r2gen_kaggle_association 0 \
 --iu_mesh_impression_path data/iu_xray/kaggle/iu_mesh_impression.json \
---resume ../r2gen_results/iu_xray/model_best.pth \
 --is_print 1 \
---remove_annotation 0 \
+--remove_annotation 1 \
 --val_test_partial_data 0 \
 --max_seq_length 110 \
 --exp 3
