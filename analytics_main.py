@@ -28,11 +28,10 @@ def main():
     # needs investigating
     # CXR496_IM - 2114
 
-
-    data_processor = DataProcessor(args)
+    tokenizer = Tokenizer(args)
+    data_processor = DataProcessor(args, tokenizer)
     # test negation detection
     tokenizer = Tokenizer(args, data_processor)
-    NegationDetection(args, tokenizer)
     ################################################################################
     print("Is association file valid: ", data_processor.validate_association())
     exp_stats = ExperimentsStatistics(tokenizer, args.exp)
