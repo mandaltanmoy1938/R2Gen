@@ -92,6 +92,15 @@ def parse_agrs():
     parser.add_argument('--iu_mesh_impression_path', type=str,
                         default=('%s/kaggle/iu_mesh_impression.json' % data_iu_xray_path),
                         help='the path to the directory containing the mesh and impression for r2gen dataset.')
+    # Path for the generated association file suffixes
+    parser.add_argument('--iu_mesh_impression_path_suffix', type=int, default=0, choices=[0, 1, 2, 3, 4],
+                        help='0 '
+                             '1 _only_sci_with!'
+                             '2 _only_sci_with_no_per_sentence'
+                             '3 _with!'
+                             '4 _with_no_per_sentence'
+                             '5 _without_negation'
+                        )
     # save directory path
     parser.add_argument('--save_dir', type=str, default='../r2gen_results/iu_xray',
                         help='the patch to save the models.')
