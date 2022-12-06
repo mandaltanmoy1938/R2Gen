@@ -26,9 +26,9 @@ time python main.py \
 --test_sample 0 \
 --create_r2gen_kaggle_association 0 \
 --iu_mesh_impression_path data/iu_xray/kaggle/iu_mesh_impression.json \
---iu_mesh_impression_path_suffix 3 \
+--iu_mesh_impression_path_suffix 1 \
 --is_print 1 \
 --remove_annotation 1 \
 --val_test_partial_data 0 \
---max_seq_length 110 \
---exp 3
+--max_seq_length 10 \
+--exp 6

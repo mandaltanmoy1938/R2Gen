@@ -127,7 +127,7 @@ class DataProcessor(object):
                 return report + mesh_attr
             elif exp == 6:
                 mesh_attr = " <sep>" + self.iu_mesh_impression_split[split][r2gen_id][
-                    'auto_generated_ontology_impression']
+                    'auto_generated_ontology_report']
                 return report + mesh_attr
         return report
 
