@@ -157,9 +157,9 @@ def parse_agrs():
                         help='1. 60(paper) train max 162 mean 37 median 34 mode 33 # val max 95 mean 36 median 33 mode 26 # test max 106 mean 33 median 30 mode 33'
                              '2. train max 166 mean 43 median 38 mode 35 # val max 95 mean 36 median 33 mode 26 # test max 106 mean 33 median 30 mode 33'
                              '3. train max 207 mean 48 median 44 mode 31 # val max 95 mean 36 median 33 mode 26 # test max 106 mean 33 median 30 mode 33'
-                             '4. train max 129 mean 10 median 6 mode 5 # val max 47 mean 9 median 5 mode 4 # test max 58 mean 8 median 4 mode 4'
-                             '5. train max 147 mean 16 median 11 mode 6 # val max 47 mean 9 median 5 mode 4 # test max 58 mean 8 median 4 mode 4'
-                             '6. train max 166 mean 13 median 8 mode 7 # val max 95 mean 36 median 33 mode 26 # test max 106 mean 33 median 30 mode 33')
+                             '4. train max 129 mean 10 median 6 mode 5 # val max 48 mean 10 median 6 mode 5 # test max 59 mean 9 median 5 mode 5'
+                             '5. train max 147 mean 16 median 11 mode 6 # val max 48 mean 10 median 6 mode 5 # test max 59 mean 9 median 5 mode 5'
+                             '6. train max 145 mean 21 median 17 mode 16 # val max 48 mean 10 median 6 mode 5 # test max 59 mean 9 median 5 mode 5')
     ###################################################################################################################
     args = parser.parse_args()
     return args
