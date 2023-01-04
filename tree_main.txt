@@ -1,0 +1,100 @@
+.
+├── analytics
+│   └── __pycache__
+│       ├── analyze.cpython-38.pyc
+│       ├── experiments_statistics.cpython-38.pyc
+│       ├── __init__.cpython-38.pyc
+│       └── plot.cpython-38.pyc
+├── best-test-epoch.log
+├── data
+│   └── r2gen.md
+├── data_processors
+│   └── __pycache__
+│       ├── data_processor.cpython-38.pyc
+│       ├── data_processors.cpython-38.pyc
+│       ├── __init__.cpython-38.pyc
+│       └── negation_detection.cpython-38.pyc
+├── _global
+│   └── __pycache__
+│       ├── argument_parser.cpython-38.pyc
+│       ├── __init__.cpython-38.pyc
+│       └── timer.cpython-38.pyc
+├── main.py
+├── models
+│   ├── __pycache__
+│   │   └── r2gen.cpython-38.pyc
+│   └── r2gen.py
+├── modules
+│   ├── att_model.py
+│   ├── caption_model.py
+│   ├── dataloaders.py
+│   ├── datasets.py
+│   ├── encoder_decoder.py
+│   ├── __init__.py
+│   ├── loss.py
+│   ├── metrics.py
+│   ├── optimizers.py
+│   ├── __pycache__
+│   │   ├── att_model.cpython-38.pyc
+│   │   ├── caption_model.cpython-38.pyc
+│   │   ├── dataloaders.cpython-38.pyc
+│   │   ├── datasets.cpython-38.pyc
+│   │   ├── encoder_decoder.cpython-38.pyc
+│   │   ├── __init__.cpython-38.pyc
+│   │   ├── loss.cpython-38.pyc
+│   │   ├── metrics.cpython-38.pyc
+│   │   ├── optimizers.cpython-38.pyc
+│   │   ├── tokenizers.cpython-38.pyc
+│   │   ├── trainer.cpython-38.pyc
+│   │   ├── utils.cpython-38.pyc
+│   │   └── visual_extractor.cpython-38.pyc
+│   ├── tokenizers.py
+│   ├── trainer.py
+│   ├── utils.py
+│   └── visual_extractor.py
+├── __pycache__
+├── pycocoevalcap
+│   ├── bleu
+│   │   ├── bleu.py
+│   │   ├── bleu_scorer.py
+│   │   ├── __init__.py
+│   │   ├── LICENSE
+│   │   └── __pycache__
+│   │       ├── bleu.cpython-38.pyc
+│   │       ├── bleu_scorer.cpython-38.pyc
+│   │       └── __init__.cpython-38.pyc
+│   ├── cider
+│   │   ├── cider.py
+│   │   ├── cider_scorer.py
+│   │   └── __init__.py
+│   ├── eval.py
+│   ├── __init__.py
+│   ├── license.txt
+│   ├── meteor
+│   │   ├── data
+│   │   │   └── paraphrase-en.gz
+│   │   ├── __init__.py
+│   │   ├── meteor-1.5.jar
+│   │   ├── meteor.py
+│   │   └── __pycache__
+│   │       ├── __init__.cpython-38.pyc
+│   │       └── meteor.cpython-38.pyc
+│   ├── __pycache__
+│   │   └── __init__.cpython-38.pyc
+│   ├── README.md
+│   ├── rouge
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-38.pyc
+│   │   │   └── rouge.cpython-38.pyc
+│   │   └── rouge.py
+│   └── tokenizer
+│       ├── __init__.py
+│       ├── ptbtokenizer.py
+│       └── stanford-corenlp-3.4.1.jar
+├── README.md
+├── run_iu_xray.sh
+├── run_mimic_cxr.sh
+└── tree.txt
+
+23 directories, 74 files
