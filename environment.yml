@@ -63,4 +63,3 @@ dependencies:
     - scispacy==0.5.1
     - https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.1/en_core_sci_sm-0.5.1.tar.gz
     - https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.1/en_ner_bc5cdr_md-0.5.1.tar.gz
-prefix: /media/compute/homes/tmandal/.pyenv/versions/miniconda3-latest/envs/r2gen
